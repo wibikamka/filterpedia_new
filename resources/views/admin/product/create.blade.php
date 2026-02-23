@@ -19,7 +19,7 @@
     @csrf
     
     <div class="mb-4">
-        <label class="block mb-1 font-semibold">SKU</label>
+        <label class="block mb-1 font-semibold">SKuU</label>
         <input type="text" name="sku" value="{{ old('sku') }}" 
                class="border p-2 w-full @error('sku') border-red-500 @enderror">
         @error('sku')

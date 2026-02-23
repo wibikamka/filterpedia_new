@@ -11,12 +11,12 @@
         placeholder="Cari produk…"
         autocomplete="off"
         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
-               bg-white dark:bg-gray-800 
-               text-gray-900 dark:text-white
-               border-gray-300 dark:border-gray-600
-               focus:border-bluefilterpedia dark:focus:border-blue-500 
+               bg-white 
+               text-gray-900
+               border-gray-300
+               focus:border-bluefilterpedia 
                focus:outline-none
-               placeholder:text-gray-500 dark:placeholder:text-gray-400"
+               placeholder:text-gray-500"
     >
    
     <div
@@ -24,9 +24,9 @@
         class="absolute left-0 top-full z-[9999] mt-2 hidden
                w-full md:w-[calc(100%+50px)] 
                rounded-lg border 
-               bg-white dark:bg-gray-800 
-               border-gray-200 dark:border-gray-700 
-               shadow-xl dark:shadow-gray-900/50
+               bg-white 
+               border-gray-200 
+               shadow-xl
                overflow-hidden"
     ></div>
 </form>
@@ -67,18 +67,18 @@
                     ? data.map(p => `
 <a href="${p.url}" 
    class="flex items-center gap-3 p-3 
-          hover:bg-gray-100 dark:hover:bg-gray-700
-          text-gray-900 dark:text-white">
+          hover:bg-gray-100
+          text-gray-900">
     <img src="${p.image || '/img/placeholder.png'}" 
          class="h-10 w-10 rounded object-cover">
     <span class="text-sm font-medium">
         ${p.name.replace(new RegExp(q, "gi"), match => 
-            `<mark class="bg-[#0672b7] dark:bg-blue-600 text-white rounded px-1">${match}</mark>`
+            `<mark class="bg-[#0672b7] text-white rounded px-1">${match}</mark>`
         )}
     </span>
 </a>
                     `).join('')
-                    : `<div class="p-3 text-sm text-gray-500 dark:text-gray-400">Produk tidak ditemukan</div>`
+                    : `<div class="p-3 text-sm text-gray-500">Produk tidak ditemukan</div>`
 
                 dropdown.classList.remove('hidden')
             } catch (e) {

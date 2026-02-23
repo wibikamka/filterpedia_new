@@ -92,9 +92,9 @@
     </div>
 </section>
 
-<section class="category-bar py-6 px-4 sm:px-6 bg-white dark:bg-gray-800 shadow-sm mb-10 rounded-lg">
+<section class="category-bar py-6 px-4 sm:px-6 bg-white shadow-sm mb-10 rounded-lg">
     <div class="container mx-auto">
-        <h2 class="text-lg lg:text-2xl font-semibold mb-6 text-gray-900 dark:text-white">
+        <h2 class="text-lg lg:text-2xl font-semibold mb-6 text-gray-900">
             Kategori
         </h2>
         <div class="grid
@@ -111,10 +111,10 @@
                     {{-- Lingkaran icon --}}
                     <a href="{{ route('product.category', $category->slug) }}"
                        class="flex items-center justify-center w-20 h-20 lg:w-40 lg:h-40 rounded-full 
-                              border border-gray-200 dark:border-gray-600 
+                              border border-gray-200 
                               hover:shadow-lg transition 
-                              bg-white dark:bg-gray-700 
-                              hover:bg-gray-50 dark:hover:bg-gray-600">
+                              bg-white 
+                              hover:bg-gray-50">
                         @if($category->icon)
                             <img src="{{ asset('storage/' . $category->icon) }}" 
                                  alt="{{ $category->name }}" 
@@ -124,7 +124,7 @@
 
                     {{-- Nama kategori --}}
                     <span class="mt-2 text-center text-xs md:text-base lg:text-lg font-medium 
-                                text-gray-800 dark:text-gray-200 truncate">
+                                text-gray-800 truncate">
                         {{ $category->name }}
                     </span>
                 </div>
@@ -139,7 +139,7 @@
 <section id="produk-terbaru" class="pb-20">
     <div class="container mx-auto">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">
                 Produk Terbaru
             </h2>
         </div>
@@ -160,8 +160,8 @@
 
 
             @empty
-                <div class="col-span-full text-center py-12 text-gray-500 dark:text-gray-400">
-                    <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="col-span-full text-center py-12 text-gray-500">
+                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                     </svg>
                     <p class="text-base font-medium">Belum ada produk tersedia</p>

@@ -7,16 +7,13 @@
 @endphp
 
 <div
-    class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:bg-gray-900
-dark:border-gray-700
-dark:hover:border-bluefilterpedia
-dark:hover:shadow-2xl shadow-sm
+    class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm
            transition-all duration-300 hover:border-bluefilterpedia hover:shadow-xl ">
 
     {{-- IMAGE (LINK KE DETAIL) --}}
     <a
         href="{{ route('product.show', $product) }}"
-        class="relative aspect-square w-full overflow-hidden bg-gray-100 dark:bg-gray-800
+        class="relative aspect-square w-full overflow-hidden bg-gray-100
  block"
     >
         @if ($image)
@@ -28,7 +25,7 @@ dark:hover:shadow-2xl shadow-sm
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             >
         @else
-            <div class="flex h-full items-center justify-center text-gray-400 dark:text-gray-500 text-sm">
+            <div class="flex h-full items-center justify-center text-gray-400 text-sm">
                 No Image
             </div>
         @endif
@@ -42,7 +39,7 @@ dark:hover:shadow-2xl shadow-sm
 
             <h3
                 class="mb-2 line-clamp-2 text-sm md:text-base  font-semibold
-                       text-gray-900 dark:text-gray-100 hover:text-bluefilterpedia transition-colors"
+                       text-gray-900 hover:text-bluefilterpedia transition-colors"
             >
                 {{ $product->name }}
             </h3>

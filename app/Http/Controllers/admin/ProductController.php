@@ -10,13 +10,26 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')
-            ->orderByDesc('created_at')
-            ->paginate(20);
+        $allowedSorts = ['name', 'price', 'stock', 'updated_at', 'created_at', 'sku'];
+        $sortBy  = in_array($request->sort_by, $allowedSorts) ? $request->sort_by : 'updated_at';
+        $sortDir = $request->sort_dir === 'asc' ? 'asc' : 'desc';
 
-        return view('admin.product.index', compact('products'));
+        $products = Product::with(['images', 'category'])
+            ->when($request->search, fn($q) =>
+                $q->where('name', 'like', '%' . $request->search . '%')
+            )
+            ->when($request->category, fn($q) =>
+                $q->where('category_id', $request->category)
+            )
+            ->orderBy($sortBy, $sortDir)
+            ->paginate(20)
+            ->withQueryString();
+
+        $categories = Category::where('is_active', 1)->orderBy('name')->get();
+
+        return view('admin.product.index', compact('products', 'categories'));
     }
 
     public function create()
@@ -29,18 +42,17 @@ class ProductController extends Controller
     public function store(Request $request, ProductService $service)
     {
         $data = $request->validate([
-            'sku' => 'required|string|max:255|unique:products,sku',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'category_id' => 'required|exists:categories,id',
-            'tokopedia_link' => 'nullable|url|max:255',
-            'is_active' => 'required|boolean',
-            'images.*' => 'nullable|image|max:2048',
+            'sku'              => 'required|string|max:255|unique:products,sku',
+            'name'             => 'required|string|max:255',
+            'description'      => 'nullable|string',
+            'price'            => 'required|numeric|min:0',
+            'stock'            => 'required|integer|min:0',
+            'category_id'      => 'required|exists:categories,id',
+            'tokopedia_link'   => 'nullable|url|max:255',
+            'is_active'        => 'required|boolean',
+            'images.*'         => 'nullable|image|max:2048',
             'primary_image_id' => 'nullable|exists:product_images,id',
         ]);
-        
 
         $service->create(
             $data,
@@ -64,18 +76,17 @@ class ProductController extends Controller
     public function update(Request $request, Product $product, ProductService $service)
     {
         $data = $request->validate([
-            'sku' => 'required|string|max:255|unique:products,sku,' . $product->id,
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'category_id' => 'required|exists:categories,id',
-            'tokopedia_link' => 'nullable|url|max:255',
-            'is_active' => 'required|boolean',
-            'images.*' => 'nullable|image|max:2048',
+            'sku'              => 'required|string|max:255|unique:products,sku,' . $product->id,
+            'name'             => 'required|string|max:255',
+            'description'      => 'nullable|string',
+            'price'            => 'required|numeric|min:0',
+            'stock'            => 'required|integer|min:0',
+            'category_id'      => 'required|exists:categories,id',
+            'tokopedia_link'   => 'nullable|url|max:255',
+            'is_active'        => 'required|boolean',
+            'images.*'         => 'nullable|image|max:2048',
             'primary_image_id' => 'nullable|exists:product_images,id',
             'deleted_images.*' => 'nullable|exists:product_images,id',
-
         ]);
 
         $service->update(

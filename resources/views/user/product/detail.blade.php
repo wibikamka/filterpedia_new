@@ -26,7 +26,7 @@
 <x-breadcrumb :links="$breadcrumbs" />
 
 </div>
-<section class="border-t-4 border-bluefilterpedia bg-white shadow-xl rounded-xl p-6 md:p-8 dark:bg-gray-800">
+<section class="border-t-4 border-bluefilterpedia bg-white shadow-xl rounded-xl p-6 md:p-8">
     <div class="mx-auto max-w-7xl">
         {{-- GRID LAYOUT DUA KOLOM --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -36,7 +36,7 @@
             <div class="lg:sticky lg:top-24 lg:h-fit">
                 {{-- Gambar Utama --}}
                 <div class="mb-6">
-                    <div class="aspect-square w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
+                    <div class="aspect-square w-full overflow-hidden rounded-xl bg-gray-100 border border-gray-200">
                         @if ($product->primaryImage)
                             <img
                                 id="mainImage"
@@ -46,7 +46,7 @@
                             >
                         @else
                             <div class="flex h-full items-center justify-center">
-                                <svg class="h-32 w-32 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="h-32 w-32 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
                                 </svg>
                             </div>
@@ -61,13 +61,13 @@
                         <button 
                             id="galleryPrev"
                             class="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10
-                                   w-8 h-8 rounded-full bg-white dark:bg-gray-700 
-                                   border border-gray-300 dark:border-gray-600
+                                   w-8 h-8 rounded-full bg-white 
+                                   border border-gray-300
                                    shadow-lg items-center justify-center
-                                   hover:bg-gray-50 dark:hover:bg-gray-600 transition
+                                   hover:bg-gray-50 transition
                                    disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Previous image">
-                            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
                         </button>
@@ -82,7 +82,7 @@
                                 <button 
                                     onclick="changeImage('{{ asset('storage/' . $image->path) }}')"
                                     class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden
-                                           border-2 {{ $image->id === $product->primaryImage->id ?? false ? 'border-bluefilterpedia' : 'border-gray-300 dark:border-gray-600' }}
+                                           border-2 {{ $image->id === $product->primaryImage->id ?? false ? 'border-bluefilterpedia' : 'border-gray-300' }}
                                            hover:border-bluefilterpedia transition">
                                     <img
                                         src="{{ asset('storage/' . $image->path) }}"
@@ -97,13 +97,13 @@
                         <button 
                             id="galleryNext"
                             class="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10
-                                   w-8 h-8 rounded-full bg-white dark:bg-gray-700 
-                                   border border-gray-300 dark:border-gray-600
+                                   w-8 h-8 rounded-full bg-white 
+                                   border border-gray-300
                                    shadow-lg items-center justify-center
-                                   hover:bg-gray-50 dark:hover:bg-gray-600 transition
+                                   hover:bg-gray-50 transition
                                    disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Next image">
-                            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </button>
@@ -114,13 +114,13 @@
             {{-- KOLOM KANAN: DESKRIPSI (Tanpa Scroll) --}}
             <div>
                 {{-- Product Name --}}
-                <h1 class="mb-3 text-xl lg:text-3xl font-semibold text-gray-900 dark:text-white">
+                <h1 class="mb-3 text-xl lg:text-3xl font-semibold text-gray-900">
                     {{ $product->name }}
                 </h1>
 
                 {{-- Price --}}
                 <div class="mb-6">
-                    <span class="text-3xl lg:text-4xl font-bold text-bluefilterpedia dark:text-bluefilterpedia">
+                    <span class="text-3xl lg:text-4xl font-bold text-bluefilterpedia">
                         Rp {{ number_format($product->price, 0, ',', '.') }}
                     </span>
                 </div>
@@ -128,14 +128,14 @@
                 {{-- Stock Info --}}
                 <div class="mb-6">
                     @if ($product->stock > 0)
-                        <span class="inline-flex items-center gap-2 rounded-lg bg-green-100 px-4 py-2 text-sm font-semibold text-green-700 dark:bg-green-900 dark:text-green-300">
+                        <span class="inline-flex items-center gap-2 rounded-lg bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             Stok Tersedia ({{ $product->stock }} unit)
                         </span>
                     @else
-                        <span class="inline-flex items-center gap-2 rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-700 dark:bg-red-900 dark:text-red-300">
+                        <span class="inline-flex items-center gap-2 rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-700">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                             </svg>
@@ -147,41 +147,41 @@
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-2 gap-4 mb-8">
                     <div class="space-y-2">
-                        <p class="text-sm text-gray-600 dark:text-gray-400">SKU</p>
-                        <p class="font-medium text-gray-900 dark:text-white">{{ $product->sku }}</p>
+                        <p class="text-sm text-gray-600">SKU</p>
+                        <p class="font-medium text-gray-900">{{ $product->sku }}</p>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-sm text-gray-600 dark:text-gray-400">Kategori</p>
-                        <p class="font-medium text-gray-900 dark:text-white">{{ $product->category->name ?? '-' }}</p>
+                        <p class="text-sm text-gray-600">Kategori</p>
+                        <p class="font-medium text-gray-900">{{ $product->category->name ?? '-' }}</p>
                     </div>
                 </div>
 
                 {{-- Divider --}}
-                <hr class="my-8 border-gray-200 dark:border-gray-700">
+                <hr class="my-8 border-gray-200">
 
                 {{-- Description dengan Show More --}}
                 <div class="mb-8">
-                    <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+                    <h3 class="mb-4 text-xl font-semibold text-gray-900">
                         Deskripsi Produk
                     </h3>
-                    <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <div class="prose max-w-none text-gray-700">
                         <div id="descriptionContent" class="line-clamp-6">
                             {!! nl2br(e($product->description ?? 'Tidak ada deskripsi untuk produk ini.')) !!}
                         </div>
                         <button 
                             id="showMoreBtn"
                             onclick="toggleDescription()"
-                            class="mt-3 text-bluefilterpedia hover:text-blue-700 dark:hover:text-blue-400 font-semibold transition hidden">
+                            class="mt-3 text-bluefilterpedia hover:text-blue-700 font-semibold transition hidden">
                             Lihat Selengkapnya
                         </button>
                     </div>
                 </div>
 
                 {{-- Divider --}}
-                <hr class="my-8 border-gray-200 dark:border-gray-700">
+                <hr class="my-8 border-gray-200">
 
                 {{-- Action Buttons --}}
-                <div class="space-y-6 border-2 border-gray-200 dark:border-gray-700 p-6 rounded-xl bg-gray-50 dark:bg-gray-900/50">
+                <div class="space-y-6 border-2 border-gray-200 p-6 rounded-xl bg-gray-50">
                     {{-- Beli Sekarang (WhatsApp) --}}
                     @if ($product->stock > 0)
                         <a
@@ -189,7 +189,7 @@
                             target="_blank"
                             class="flex w-full items-center justify-center gap-3
                                    rounded-lg px-2 lg:px-6 py-2 lg:py-4
-                                   text-lg lg:text-xl font-bold text-gray-900 dark:text-white border-2 border-bluefilterpedia shadow-lg
+                                   text-lg lg:text-xl font-bold text-gray-900 border-2 border-bluefilterpedia shadow-lg
                                    transition-all duration-300
                                    hover:bg-bluefilterpedia hover:text-white hover:shadow-xl">
                             <img
@@ -214,14 +214,14 @@
                             target="_blank"
                             rel="nofollow noopener"
                             class="flex items-center justify-center gap-3
-                                   rounded-lg border border-gray-300 dark:border-gray-600 px-6 py-3
-                                   hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                                   rounded-lg border border-gray-300 px-6 py-3
+                                   hover:bg-gray-100 transition"
                             title="Beli {{ $product->name }} di Tokopedia">
                             <img
                                 src="{{ asset('storage/img/logo/Tokopedia_Mascot.png') }}"
                                 alt="Tokopedia"
                                 class="h-8 object-contain">
-                            <span class="text-gray-700 dark:text-gray-300 font-medium">
+                            <span class="text-gray-700 font-medium">
                                 Beli di Tokopedia
                             </span>
                         </a>
@@ -235,7 +235,7 @@
 {{-- Related Products --}}
 @if ($relatedProducts->count())
 <section class="mt-12 pb-16">
-    <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+    <h2 class="mb-6 text-2xl font-bold text-gray-900">
         Produk Terkait
     </h2>
 

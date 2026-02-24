@@ -20,7 +20,7 @@
         id="wa-button" 
         href="https://wa.me/6281282388324?text=Halo,%20saya%20ingin%20berkonsultasi"
         target="_blank"
-        class="fixed bottom-30 md:bottom-28 right-4 md:right-6 z-50 group floating-button"
+        class="fixed bottom-32 md:bottom-28 right-4 md:right-6 z-50 group floating-button"
         aria-label="Konsultasi via WhatsApp">
         
         {{-- Rectangle Container --}}

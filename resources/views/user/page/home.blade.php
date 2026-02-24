@@ -107,27 +107,25 @@
 
             @foreach($categories as $category)
                 <div class="flex flex-col items-center gap-3">
+    {{-- Lingkaran icon --}}
+    <a href="{{ route('product.category', $category->slug) }}"
+       class="flex items-center justify-center w-20 h-20 lg:w-40 lg:h-40 rounded-full 
+              border border-gray-200 hover:shadow-lg transition bg-white hover:bg-gray-50
+              p-2"> {{-- Tambahkan padding agar gambar tidak terlalu mepet --}}
+        
+        @if($category->icon)
+            <img src="{{ asset('storage/' . $category->icon) }}" 
+                 alt="{{ $category->name }}" 
+                 class="w-full h-full object-contain"> {{-- Gunakan w-full h-full --}}
+        @endif
+    </a>
 
-                    {{-- Lingkaran icon --}}
-                    <a href="{{ route('product.category', $category->slug) }}"
-                       class="flex items-center justify-center w-20 h-20 lg:w-40 lg:h-40 rounded-full 
-                              border border-gray-200 
-                              hover:shadow-lg transition 
-                              bg-white 
-                              hover:bg-gray-50">
-                        @if($category->icon)
-                            <img src="{{ asset('storage/' . $category->icon) }}" 
-                                 alt="{{ $category->name }}" 
-                                 class="w-15 h-15 lg:w-32 lg:h-32 object-contain">
-                        @endif
-                    </a>
-
-                    {{-- Nama kategori --}}
-                    <span class="mt-2 text-center text-xs md:text-base lg:text-lg font-medium 
-                                text-gray-800 truncate">
-                        {{ $category->name }}
-                    </span>
-                </div>
+    {{-- Nama kategori --}}
+    <span class="mt-2 text-center text-xs md:text-base lg:text-lg font-medium 
+                text-gray-800 truncate max-w-20 lg:max-w-40">
+        {{ $category->name }}
+    </span>
+</div>
             @endforeach
 
         </div>

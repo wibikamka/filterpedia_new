@@ -13,6 +13,12 @@
 /.zed
 /auth.json
 /node_modules
+/public
+/public/index.php
+/public/.htaccess
+/public/build
+/public/hot
+/public/storage
 /public/build
 /public/hot
 /public/storage

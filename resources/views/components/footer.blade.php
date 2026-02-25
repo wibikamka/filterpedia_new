@@ -1,31 +1,57 @@
 {{-- resources/views/components/footer.blade.php --}}
-<footer id="main-footer"class="border-t-4 border-bluefilterpedia bg-gray-50">
+<footer id="main-footer" class="border-t-4 border-bluefilterpedia bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-white">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             {{-- Logo & Brand Section --}}
             <div class="mb-6 md:mb-0">
                 <a href="{{ url('/') }}" class="flex items-center">
                     <img src="{{ asset('storage/img/logo/filterpedialastfilterpedia.png') }}" class="me-3 h-8" alt="filterpedia Logo">
-                    <span class="self-center whitespace-nowrap text-2xl lg:text-4xl font-semibold text-gray-900">
+                    <span class="self-center whitespace-nowrap text-2xl lg:text-4xl font-semibold text-gray-900 dark:text-bluefilterpedia">
                         filterpedia
                     </span>
                 </a>
-            </div>
+                
+                {{-- Metode Pembayaran & Pengiriman --}}
+                <div class="flex flex-col sm:flex-row gap-6 mt-4">
+                    {{-- Payment Methods --}}
+                    <div>
+                        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Metode Pembayaran:</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <img src="{{ asset('storage/img/logo/Bank_Central_Asia.svg') }}" alt="BCA" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/Bank_Mandiri_logo_2016.svg') }}" alt="Mandiri" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/BANK_BRI_logo.svg') }}" alt="BRI" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/Bank_Central_Asia.svg') }}" alt="BNI" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/Bank_Mandiri_logo_2016.svg') }}" alt="CIMB" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/BANK_BRI_logo.svg') }}" alt="Danamon" class="h-8 w-auto object-contain bg-white rounded p-1">
+                        </div>
+                    </div>
 
+                    {{-- Shipping Methods --}}
+                    <div>
+                        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Pengiriman:</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <img src="{{ asset('storage/img/logo/kurirtokofilterpedia.svg') }}" alt="Kurir Filterpedia" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/J&T_Express_logo.svg') }}" alt="J&T Express" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/New_Logo_JNE.png') }}" alt="JNE" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/J&T_Express_logo.svg') }}" alt="SiCepat" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/New_Logo_JNE.png') }}" alt="Anteraja" class="h-8 w-auto object-contain bg-white rounded p-1">
+                            <img src="{{ asset('storage/img/logo/kurirtokofilterpedia.svg') }}" alt="Ninja Express" class="h-8 w-auto object-contain bg-white rounded p-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
             {{-- Footer Links Grid --}}
             <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
                 {{-- Resources Column --}}
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900">Resources</h2>
-                    <ul class="font-medium text-gray-600">
+                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Resources</h2>
+                    <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
                             <a href="{{ url('/') }}" class="hover:underline hover:text-bluefilterpedia">Home</a>
                         </li>
                         <li class="mb-4">
-                                <a href="#produk-terbaru"
-       class="hover:underline hover:text-bluefilterpedia">
-       Products
-    </a>
+                            <a href="#produk-terbaru" class="hover:underline hover:text-bluefilterpedia">Products</a>
                         </li>
                         <li>
                             <a href="{{ url('#') }}" class="hover:underline hover:text-bluefilterpedia">About</a>
@@ -35,8 +61,8 @@
 
                 {{-- Follow Us Column --}}
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900">Follow us</h2>
-                    <ul class="font-medium text-gray-600">
+                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Follow us</h2>
+                    <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
                             <a href="#" class="hover:underline hover:text-bluefilterpedia">Instagram</a>
                         </li>
@@ -48,8 +74,8 @@
 
                 {{-- Legal Column --}}
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900">Legal</h2>
-                    <ul class="font-medium text-gray-600">
+                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Legal</h2>
+                    <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
                             <a href="#" class="hover:underline hover:text-bluefilterpedia">Privacy Policy</a>
                         </li>
@@ -67,55 +93,27 @@
         {{-- Bottom Section --}}
         <div class="sm:flex sm:items-center sm:justify-between">
             {{-- Copyright --}}
-            <span class="text-sm text-gray-600 sm:text-center">
+            <span class="text-sm text-gray-600 dark:text-gray-400 sm:text-center">
                 © {{ date('Y') }} <a href="{{ url('/') }}" class="hover:underline hover:text-bluefilterpedia">filterpedia™</a>. All Rights Reserved.
             </span>
 
             {{-- Social Media Icons --}}
             <div class="mt-4 flex gap-5 sm:mt-0 sm:justify-center">
                 {{-- Facebook --}}
-                <a href="#" class="text-gray-600 hover:text-bluefilterpedia transition-colors">
+                <a href="#" class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
                     </svg>
                     <span class="sr-only">Facebook page</span>
                 </a>
 
-                {{-- Discord --}}
-                <a href="#" class="text-gray-600 hover:text-bluefilterpedia transition-colors">
-                        <svg class="h-5 w-5"
-         xmlns="http://www.w3.org/2000/svg"
-         fill="currentColor"
-         viewBox="0 0 24 24">
-
-        <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.5-.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
-    </svg>
+                {{-- Instagram --}}
+                <a href="#" class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.5-.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
+                    </svg>
                     <span class="sr-only">Instagram</span>
                 </a>
-
-                {{-- Twitter/X --}}
-                <!-- <a href="#" class="text-gray-600 hover:text-bluefilterpedia transition-colors">
-                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/>
-                    </svg>
-                    <span class="sr-only">Twitter page</span>
-                </a> -->
-
-                {{-- GitHub --}}
-                <!-- <a href="#" class="text-gray-600 hover:text-bluefilterpedia transition-colors">
-                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="sr-only">GitHub account</span>
-                </a> -->
-
-                {{-- Dribbble --}}
-                <!-- <a href="#" class="text-gray-600 hover:text-bluefilterpedia transition-colors">
-                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10A10.009 10.009 0 0 0 12 2Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.093 20.093 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM10 3.707a8.82 8.82 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.755 45.755 0 0 0 10 3.707Zm-6.358 6.555a8.57 8.57 0 0 1 4.73-5.981 53.99 53.99 0 0 1 3.168 4.941 32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.641 31.641 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM12 20.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 15.113 13a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="sr-only">Dribbble account</span>
-                </a> -->
             </div>
         </div>
     </div>

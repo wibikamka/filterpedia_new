@@ -1,3 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@custom-variant dark (&:where(.dark, .dark *));
+/* Custom Theme */
+@theme {
+    --color-bluefilterpedia: #0077ba;
+    --color-bluefilterpedia-600: #083c82;
+}
+
+/* Dark mode override */
+.dark {
+    --color-bluefilterpedia: #0077ba;
+}

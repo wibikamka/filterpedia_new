@@ -7,7 +7,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white text-gray-900 overflow-x-hidden">
+<body class="bg-white dark:bg-gray-950 
+text-gray-900 dark:text-gray-100 
+overflow-x-hidden transition-colors duration-300">
 
     {{-- Navbar --}}
     <x-navbar />
@@ -18,13 +20,13 @@
     {{-- WhatsApp Button --}}
     <a 
         id="wa-button" 
-        href="https://wa.me/6281282388324?text=Halo,%20saya%20ingin%20berkonsultasi"
+        href="https://wa.me/6281110058788?text=Halo,%20saya%20ingin%20berkonsultasi"
         target="_blank"
         class="fixed bottom-32 md:bottom-28 right-4 md:right-6 z-50 group floating-button"
         aria-label="Konsultasi via WhatsApp">
         
         {{-- Rectangle Container --}}
-        <div class="button-container flex items-center bg-white rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
+        <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
             {{-- WhatsApp Icon (Bulat di Kiri) --}}
             <div class="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ring-2 ring-green-500 flex-shrink-0">
                 <img 
@@ -34,7 +36,7 @@
             </div>
             
             {{-- Text (di Kanan) - Muncul saat hover --}}
-            <span class="button-text text-gray-900 font-medium text-sm md:text-base whitespace-nowrap text-center">
+            <span class="button-text text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base whitespace-nowrap text-center">
                 Consultation
             </span>
         </div>
@@ -49,9 +51,9 @@
         aria-label="Kunjungi Toko Tokopedia">
         
         {{-- Rectangle Container --}}
-        <div class="button-container flex items-center bg-white rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
+        <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
             {{-- Tokopedia Icon (Bulat di Kiri) --}}
-            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center ring-2 ring-green-600 flex-shrink-0">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center ring-2 ring-green-600 flex-shrink-0">
                 <img 
                     src="{{ asset('storage/img/logo/Tokopedia_Mascot.png') }}" 
                     alt="Tokopedia" 
@@ -59,7 +61,7 @@
             </div>
             
             {{-- Text (di Kanan) - Muncul saat hover --}}
-            <span class="button-text text-gray-900 font-medium text-sm md:text-base whitespace-nowrap text-center">
+            <span class="button-text text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base whitespace-nowrap text-center">
                 Tokopedia
             </span>
         </div>

@@ -26,7 +26,7 @@
 <x-breadcrumb :links="$breadcrumbs" />
 
 </div>
-<section class="border-t-4 border-bluefilterpedia bg-white shadow-xl rounded-xl p-6 md:p-8">
+<section class="border-t-4 border-bluefilterpedia bg-white dark:bg-gray-800 shadow-xl rounded-xl p-6 md:p-8">
     <div class="mx-auto max-w-7xl">
         {{-- GRID LAYOUT DUA KOLOM --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -36,7 +36,7 @@
             <div class="lg:sticky lg:top-24 lg:h-fit">
                 {{-- Gambar Utama --}}
                 <div class="mb-6">
-                    <div class="aspect-square w-full overflow-hidden rounded-xl bg-gray-100 border border-gray-200">
+                    <div class="aspect-square w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
                         @if ($product->primaryImage)
                             <img
                                 id="mainImage"
@@ -114,7 +114,7 @@
             {{-- KOLOM KANAN: DESKRIPSI (Tanpa Scroll) --}}
             <div>
                 {{-- Product Name --}}
-                <h1 class="mb-3 text-xl lg:text-3xl font-semibold text-gray-900">
+                <h1 class="mb-3 text-xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">
                     {{ $product->name }}
                 </h1>
 
@@ -147,12 +147,12 @@
                 {{-- Meta Info --}}
                 <div class="grid grid-cols-2 gap-4 mb-8">
                     <div class="space-y-2">
-                        <p class="text-sm text-gray-600">SKU</p>
-                        <p class="font-medium text-gray-900">{{ $product->sku }}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">SKU</p>
+                        <p class="font-medium text-gray-900 dark:text-gray-100">{{ $product->sku }}</p>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-sm text-gray-600">Kategori</p>
-                        <p class="font-medium text-gray-900">{{ $product->category->name ?? '-' }}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Kategori</p>
+                        <p class="font-medium text-gray-900 dark:text-gray-100">{{ $product->category->name ?? '-' }}</p>
                     </div>
                 </div>
 
@@ -161,10 +161,10 @@
 
                 {{-- Description dengan Show More --}}
                 <div class="mb-8">
-                    <h3 class="mb-4 text-xl font-semibold text-gray-900">
+                    <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
                         Deskripsi Produk
                     </h3>
-                    <div class="prose max-w-none text-gray-700">
+                    <div class="prose max-w-none text-gray-700 dark:text-gray-300">
                         <div id="descriptionContent" class="line-clamp-6">
                             {!! nl2br(e($product->description ?? 'Tidak ada deskripsi untuk produk ini.')) !!}
                         </div>
@@ -181,17 +181,17 @@
                 <hr class="my-8 border-gray-200">
 
                 {{-- Action Buttons --}}
-                <div class="space-y-6 border-2 border-gray-200 p-6 rounded-xl bg-gray-50">
+                <div class="space-y-6 border-2 border-gray-200 p-6 rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                     {{-- Beli Sekarang (WhatsApp) --}}
                     @if ($product->stock > 0)
                         <a
-                            href="https://wa.me/6281234567890?text={{ urlencode('Halo, saya tertarik dengan produk: ' . $product->name) }}"
+                            href="https://wa.me/6281110058788?text={{ urlencode('Halo, saya tertarik dengan produk: ' . $product->name) }}"
                             target="_blank"
                             class="flex w-full items-center justify-center gap-3
                                    rounded-lg px-2 lg:px-6 py-2 lg:py-4
-                                   text-lg lg:text-xl font-bold text-gray-900 border-2 border-bluefilterpedia shadow-lg
+                                   text-lg lg:text-xl font-bold text-gray-900 dark:text-gray-100 border-2 border-bluefilterpedia shadow-lg
                                    transition-all duration-300
-                                   hover:bg-bluefilterpedia hover:text-white hover:shadow-xl">
+                                   hover:bg-bluefilterpedia hover:text-white  hover:shadow-xl">
                             <img
                                 src="{{ asset('storage/img/logo/waicon1.png') }}"
                                 alt="WhatsApp"
@@ -214,14 +214,14 @@
                             target="_blank"
                             rel="nofollow noopener"
                             class="flex items-center justify-center gap-3
-                                   rounded-lg border border-gray-300 px-6 py-3
-                                   hover:bg-gray-100 transition"
+                                   rounded-lg border border-gray-300 dark:border-gray-600 px-6 py-3
+                                   hover:bg-gray-100 dark:hover:bg-gray-600 transition"
                             title="Beli {{ $product->name }} di Tokopedia">
                             <img
                                 src="{{ asset('storage/img/logo/Tokopedia_Mascot.png') }}"
                                 alt="Tokopedia"
                                 class="h-8 object-contain">
-                            <span class="text-gray-700 font-medium">
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">
                                 Beli di Tokopedia
                             </span>
                         </a>

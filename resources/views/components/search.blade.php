@@ -10,12 +10,10 @@
         data-search-input
         placeholder="Cari produk…"
         autocomplete="off"
-        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm
-               bg-white 
-               text-gray-900
-               border-gray-300
-               focus:border-bluefilterpedia 
-               focus:outline-none
+        class="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm
+               bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+               focus:border-bluefilterpedia focus:outline-none
+                transition-colors duration-300"
                placeholder:text-gray-500"
     >
    
@@ -24,8 +22,9 @@
         class="absolute left-0 top-full z-[9999] mt-2 hidden
                w-full md:w-[calc(100%+50px)] 
                rounded-lg border 
-               bg-white 
-               border-gray-200 
+               bg-white dark:bg-gray-800
+               text-gray-900 dark:text-gray-100 
+               border-gray-200 dark:border-gray-700
                shadow-xl
                overflow-hidden"
     ></div>
@@ -67,8 +66,8 @@
                     ? data.map(p => `
 <a href="${p.url}" 
    class="flex items-center gap-3 p-3 
-          hover:bg-gray-100
-          text-gray-900">
+          hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded"
+          text-gray-900 dark:text-gray-100">
     <img src="${p.image || '/img/placeholder.png'}" 
          class="h-10 w-10 rounded object-cover">
     <span class="text-sm font-medium">

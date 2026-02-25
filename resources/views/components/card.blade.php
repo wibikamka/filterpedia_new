@@ -7,7 +7,7 @@
 @endphp
 
 <div
-    class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm
+    class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm
            transition-all duration-300 hover:border-bluefilterpedia hover:shadow-xl ">
 
     {{-- IMAGE (LINK KE DETAIL) --}}
@@ -39,7 +39,7 @@
 
             <h3
                 class="mb-2 line-clamp-2 text-sm md:text-base  font-semibold
-                       text-gray-900 hover:text-bluefilterpedia transition-colors"
+                       text-gray-900 dark:text-gray-100 hover:text-bluefilterpedia transition-colors"
             >
                 {{ $product->name }}
             </h3>
@@ -80,7 +80,7 @@
 
                 {{-- WhatsApp --}}
                 <a
-                    href="https://wa.me/6281282388324?text=Halo, saya tertarik dengan produk {{ urlencode($product->name) }}"
+                    href="https://wa.me/6281110058788?text=Halo, saya tertarik dengan produk {{ urlencode($product->name) }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Chat WhatsApp"

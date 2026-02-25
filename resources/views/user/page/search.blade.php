@@ -117,13 +117,14 @@ input.addEventListener('input', async () => {
         }
 
         autoGrid.innerHTML = data.map(p => `
-<div class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-bluefilterpedia hover:shadow-xl">
+<div class="group flex flex-col w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700
+ shadow-sm transition-all duration-300 hover:border-bluefilterpedia hover:shadow-xl">
     <a href="${p.url}" class="relative aspect-square w-full overflow-hidden bg-gray-100 block">
         <img src="${p.image}" alt="${p.name}" loading="lazy" draggable="false" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
     </a>
     <div class="flex flex-col flex-1 p-4">
         <a href="${p.url}">
-            <h3 class="mb-2 line-clamp-2 text-sm md:text-base lg:text-lg font-semibold text-gray-900 hover:text-bluefilterpedia transition-colors">
+            <h3 class="mb-2 line-clamp-2 text-sm md:text-base lg:text-lg font-semibold text-gray-900 dark:text-gray-100 hover:text-bluefilterpedia transition-colors">
                 ${p.name}
             </h3>
         </a>

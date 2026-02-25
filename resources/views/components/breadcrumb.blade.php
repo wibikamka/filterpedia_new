@@ -8,14 +8,14 @@
                 @if(!empty($link['url']))
                     <a
                         href="{{ $link['url'] }}"
-                        class="text-gray-500 hover:text-bluefilterpedia transition"
+                        class="text-gray-500 dark:text-gray-400 hover:text-bluefilterpedia transition"
                     >
                         {{ $link['title'] }}
                     </a>
-                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="mx-2 text-gray-400 dark:text-gray-500">/</span>
                 @else
                     <span
-                        class="text-gray-900 font-semibold"
+                        class="text-gray-900 dark:text-gray-100 font-semibold"
                         aria-current="page"
                     >
                         {{ $link['title'] }}

@@ -1,12 +1,41 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="id">
 <head>
+    {{-- Basic Meta --}}
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Filterpedia')</title>
 
+    {{-- Primary SEO --}}
+    <title>@yield('title', 'Filterpedia - Supplier Cartridge Filter & Water Treatment')</title>
+    <meta name="description" content="@yield('meta_description', 'Filterpedia adalah supplier cartridge filter, housing filter, dan solusi water treatment untuk industri dan komersial.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'cartridge filter, housing filter, water treatment, filter industri, filter air, gemu filter, pentair, everpure, filter air minum, filter kolam renang, uv sterilizer, filter industri kimia, filter industri makanan, filter industri farmasi, nuvonic, filter industri tekstil, filter industri pulp & paper, filter industri minyak & gas, filter industri elektronik, filter industri otomotif')">
+    <meta name="author" content="Filterpedia">
+
+    {{-- Canonical URL --}}
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Open Graph (Facebook, LinkedIn) --}}
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:title" content="@yield('title', 'Filterpedia')">
+    <meta property="og:description" content="@yield('meta_description', 'Solusi filter industri dan water treatment terpercaya.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Filterpedia')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Solusi filter industri dan water treatment terpercaya.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+
+    {{-- Vite Assets --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('structured_data')
 </head>
+
 <body class="bg-white dark:bg-gray-950 
 text-gray-900 dark:text-gray-100 
 overflow-x-hidden transition-colors duration-300">
@@ -28,7 +57,7 @@ overflow-x-hidden transition-colors duration-300">
         {{-- Rectangle Container --}}
         <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
             {{-- WhatsApp Icon (Bulat di Kiri) --}}
-            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ring-2 ring-green-500 flex-shrink-0">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center ring-2 ring-green-500 shrink-0">
                 <img 
                     src="{{ asset('storage/img/logo/waicon1.png') }}" 
                     alt="WhatsApp" 
@@ -53,7 +82,7 @@ overflow-x-hidden transition-colors duration-300">
         {{-- Rectangle Container --}}
         <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
             {{-- Tokopedia Icon (Bulat di Kiri) --}}
-            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center ring-2 ring-green-600 flex-shrink-0">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center ring-2 ring-green-600 shrink-0">
                 <img 
                     src="{{ asset('storage/img/logo/Tokopedia_Mascot.png') }}" 
                     alt="Tokopedia" 
@@ -73,81 +102,33 @@ overflow-x-hidden transition-colors duration-300">
     {{-- Footer --}}
     <x-footer />
 
+    <script>
+        const waBtn = document.getElementById('wa-button');
+        const tokBtn = document.getElementById('tok-button');
+        const footer = document.getElementById('main-footer');
+    
+        function updateButtonPosition() {
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+    
+            const distanceFromBottom = windowHeight - footerRect.top;
+    
+            if (distanceFromBottom > 0) {
+                
+                const offset = distanceFromBottom + 12; 
+    
+                waBtn.style.bottom = (offset + 92) + 'px'; 
+                tokBtn.style.bottom = (offset + 16) + 'px';
+            } else {
+                waBtn.style.bottom = '';
+                tokBtn.style.bottom = '';
+            }
+        }
+    
+        window.addEventListener('scroll', updateButtonPosition);
+        window.addEventListener('resize', updateButtonPosition);
+        updateButtonPosition(); // jalankan sekali saat load
+    </script>
 </body>
-<script>
-    const waBtn = document.getElementById('wa-button');
-    const tokBtn = document.getElementById('tok-button');
-    const footer = document.getElementById('main-footer');
 
-    function updateButtonPosition() {
-        const footerRect = footer.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        const distanceFromBottom = windowHeight - footerRect.top;
-
-        if (distanceFromBottom > 0) {
-            
-            const offset = distanceFromBottom + 12; 
-
-            waBtn.style.bottom = (offset + 92) + 'px'; 
-            tokBtn.style.bottom = (offset + 16) + 'px';
-        } else {
-            waBtn.style.bottom = '';
-            tokBtn.style.bottom = '';
-        }
-    }
-
-    window.addEventListener('scroll', updateButtonPosition);
-    window.addEventListener('resize', updateButtonPosition);
-    updateButtonPosition(); // jalankan sekali saat load
-</script>
-<style>
-
-.button-container {
-    width: 3.5rem; /* 56px - sesuai icon w-12 (48px) + padding */
-    height: 3.5rem; /* 56px */
-    transition: width 0.3s ease-in-out;
-    padding-right: 0.25rem;
-}
-
-@media (min-width: 768px) {
-    .button-container {
-        width: 4.5rem; /* 72px - sesuai icon w-16 (64px) + padding */
-        height: 4.5rem; /* 72px */
-    }
-}
-    
-    /* Text tersembunyi by default */
-    .button-text {
-        opacity: 0;
-        width: 0;
-        margin-left: 0;
-        transition: opacity 0.3s ease-in-out, width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
-    }
-    
-    /* Hover state - expand dengan text */
-    .floating-button:hover .button-container {
-        width: 11rem; /* 176px */
-        padding-right: 1rem;
-    }
-    
-    @media (min-width: 768px) {
-        .floating-button:hover .button-container {
-            width: 13rem; /* 208px */
-        }
-    }
-    
-    /* Text muncul saat hover */
-    .floating-button:hover .button-text {
-        opacity: 1;
-        width: auto;
-        margin-left: 0.75rem;
-    }
-    
-    /* Hover effect untuk ring */
-    .floating-button:hover .ring-green-500,
-    .floating-button:hover .ring-green-600 {
-        box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
-    }
-</style>
 </html>

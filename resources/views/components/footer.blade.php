@@ -1,6 +1,6 @@
 {{-- resources/views/components/footer.blade.php --}}
 <footer id="main-footer" class="border-t-4 border-bluefilterpedia bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-white">
-    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <div class="mx-auto w-full max-w-7xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             {{-- Logo & Brand Section --}}
             <div class="mb-6 md:mb-0">
@@ -10,35 +10,73 @@
                         filterpedia
                     </span>
                 </a>
-                
-                {{-- Metode Pembayaran & Pengiriman --}}
-                <div class="flex flex-col sm:flex-row gap-6 mt-4">
-                    {{-- Payment Methods --}}
-                    <div>
-                        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Metode Pembayaran:</span>
-                        <div class="grid grid-cols-3 gap-2">
-                            <img src="{{ asset('storage/img/logo/Bank_Central_Asia.svg') }}" alt="BCA" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/Bank_Mandiri_logo_2016.svg') }}" alt="Mandiri" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/BANK_BRI_logo.svg') }}" alt="BRI" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/Bank_Central_Asia.svg') }}" alt="BNI" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/Bank_Mandiri_logo_2016.svg') }}" alt="CIMB" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/BANK_BRI_logo.svg') }}" alt="Danamon" class="h-8 w-auto object-contain bg-white rounded p-1">
-                        </div>
-                    </div>
-
-                    {{-- Shipping Methods --}}
-                    <div>
-                        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Pengiriman:</span>
-                        <div class="grid grid-cols-3 gap-2">
-                            <img src="{{ asset('storage/img/logo/kurirtokofilterpedia.svg') }}" alt="Kurir Filterpedia" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/J&T_Express_logo.svg') }}" alt="J&T Express" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/New_Logo_JNE.png') }}" alt="JNE" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/J&T_Express_logo.svg') }}" alt="SiCepat" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/New_Logo_JNE.png') }}" alt="Anteraja" class="h-8 w-auto object-contain bg-white rounded p-1">
-                            <img src="{{ asset('storage/img/logo/kurirtokofilterpedia.svg') }}" alt="Ninja Express" class="h-8 w-auto object-contain bg-white rounded p-1">
-                        </div>
-                    </div>
+<p class="mt-3 text-xs max-w-lg leading-relaxed text-gray-600 dark:text-gray-400">
+    Dari kebutuhan
+    <span class="font-semibold text-gray-900 dark:text-white">industri</span>
+    hingga
+    <span class="font-semibold text-gray-900 dark:text-white">rumah tangga</span>,
+    kami menyediakan solusi filtrasi yang tepat —
+    <span class="font-medium text-bluefilterpedia">cartridge filter</span>,
+    <span class="font-medium text-bluefilterpedia">housing filter</span>,
+    hingga sistem
+    <span class="font-semibold text-bluefilterpedia dark:text-blue-400">water treatment</span>
+    lengkap untuk
+    <span class="font-medium text-gray-700 dark:text-gray-300">manufaktur</span>,
+    <span class="font-medium text-gray-700 dark:text-gray-300">farmasi</span>,
+    <span class="font-medium text-gray-700 dark:text-gray-300">food & beverage</span>,
+    dan kebutuhan air 
+    <span class="font-medium text-gray-700 dark:text-gray-300">sehari-hari.</span>,
+</p>
+{{-- Metode Pembayaran & Pengiriman --}}
+<div class="flex flex-col sm:flex-row gap-6 mt-4">
+    
+    {{-- Payment Methods --}}
+    <div>
+        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Metode Pembayaran:</span>
+        <div class="grid grid-cols-3 gap-2">
+            @foreach([
+                ['src' => 'img/logo/Bank_Central_Asia.svg',      'alt' => 'BCA'],
+                ['src' => 'img/logo/Bank_Mandiri_logo_2016.svg',  'alt' => 'Mandiri'],
+                ['src' => 'img/logo/BANK_BRI_logo.svg',           'alt' => 'BRI'],
+                ['src' => 'img/logo/GoPay.svg',                   'alt' => 'GoPay'],
+                ['src' => 'img/logo/dana.svg',                    'alt' => 'Dana'],
+                ['src' => 'img/logo/shopeepay.svg',               'alt' => 'ShopeePay'],
+            ] as $item)
+                <div class="w-20 h-10 flex items-center justify-center 
+                            bg-white rounded-lg shadow-sm px-2 py-1
+                            border border-gray-100">
+                    <img src="{{ asset('storage/' . $item['src']) }}" 
+                         alt="{{ $item['alt'] }}" 
+                         class="w-full h-full object-contain">
                 </div>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- Shipping Methods --}}
+    <div>
+        <span class="font-semibold text-gray-800 dark:text-gray-200 block mb-2">Pengiriman:</span>
+        <div class="grid grid-cols-3 gap-2">
+            @foreach([
+                ['src' => 'img/logo/kurirtokofilterpedia.svg',  'alt' => 'Kurir Filterpedia'],
+                ['src' => 'img/logo/J&T_Express_logo.svg',      'alt' => 'J&T Express'],
+                ['src' => 'img/logo/New_Logo_JNE.png',          'alt' => 'JNE'],
+                ['src' => 'img/logo/gosend-seeklogo.svg',        'alt' => 'GoSend'],
+                ['src' => 'img/logo/grab.svg',                   'alt' => 'Grab'],
+                ['src' => 'img/logo/tiki.svg',                   'alt' => 'Tiki'],
+            ] as $item)
+                <div class="w-20 h-10 flex items-center justify-center 
+                            bg-white rounded-lg shadow-sm px-2 py-1
+                            border border-gray-100">
+                    <img src="{{ asset('storage/' . $item['src']) }}" 
+                         alt="{{ $item['alt'] }}" 
+                         class="w-full h-full object-contain">
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+</div>
             </div>
         
             {{-- Footer Links Grid --}}

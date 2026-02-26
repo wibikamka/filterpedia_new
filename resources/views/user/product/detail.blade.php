@@ -1,8 +1,73 @@
 {{-- resources/views/user/product/detail.blade.php --}}
 @extends('layout.user')
 
-@section('title', $product->name)
+@section('title', $product->name . ' - ' . ($product->category->name ?? '') . ' | Filterpedia')
+@section('meta_description', 
+Str::limit(strip_tags($product->description), 155))
+@section('structured_data')
+@php
+$productSchema = [
+    "@context" => "https://schema.org/",
+    "@type" => "Product",
+    "name" => $product->name,
+    "image" => $product->primaryImage 
+        ? asset('storage/'.$product->primaryImage->path) 
+        : null,
+    "description" => \Illuminate\Support\Str::limit(strip_tags($product->description), 200),
+    "sku" => $product->sku,
+    "brand" => [
+        "@type" => "Brand",
+        "name" => "Filterpedia",
+    ],
+    "offers" => [
+        "@type" => "Offer",
+        "priceCurrency" => "IDR",
+        "price" => $product->price,
+        "availability" => $product->stock > 0
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock",
+    ],
+];
 
+$breadcrumbItems = [
+    [
+        "@type" => "ListItem",
+        "position" => 1,
+        "name" => "Home",
+        "item" => route('home'),
+    ],
+];
+
+if ($product->category) {
+    $breadcrumbItems[] = [
+        "@type" => "ListItem",
+        "position" => 2,
+        "name" => $product->category->name,
+        "item" => route('product.category', $product->category),
+    ];
+}
+
+$breadcrumbItems[] = [
+    "@type" => "ListItem",
+    "position" => $product->category ? 3 : 2,
+    "name" => $product->name,
+];
+
+$breadcrumbSchema = [
+    "@context" => "https://schema.org",
+    "@type" => "BreadcrumbList",
+    "itemListElement" => $breadcrumbItems,
+];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+</script>
+
+<script type="application/ld+json">
+{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endsection
 @section('content')
 <div class="mx-auto py-4 px-4">
 @php
@@ -41,7 +106,7 @@
                             <img
                                 id="mainImage"
                                 src="{{ asset('storage/' . $product->primaryImage->path) }}"
-                                alt="{{ $product->name }}"
+                                alt="{{ $product->name }} - {{ $product->category->name ?? 'Filter Industri' }}"
                                 class="w-full h-full object-cover"
                             >
                         @else
@@ -82,7 +147,7 @@
                                 <button 
                                     onclick="changeImage('{{ asset('storage/' . $image->path) }}')"
                                     class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden
-                                           border-2 {{ $image->id === $product->primaryImage->id ?? false ? 'border-bluefilterpedia' : 'border-gray-300' }}
+                                           border-2 {{ optional($product->primaryImage)->id === $image->id ? 'border-bluefilterpedia' : 'border-gray-300' }}
                                            hover:border-bluefilterpedia transition">
                                     <img
                                         src="{{ asset('storage/' . $image->path) }}"
@@ -152,7 +217,7 @@
                     </div>
                     <div class="space-y-2">
                         <p class="text-sm text-gray-600 dark:text-gray-400">Kategori</p>
-                        <p class="font-medium text-gray-900 dark:text-gray-100">{{ $product->category->name ?? '-' }}</p>
+                        <p class="font-medium text-gray-900 dark:text-gray-100"><a href="{{ route('product.category', $product->category) }}" class="hover:text-bluefilterpedia">{{ $product->category->name ?? '-' }}</a></p>
                     </div>
                 </div>
 
@@ -250,9 +315,7 @@
 
 
 <script>
-    function changeImage(imageSrc) {
-        document.getElementById('mainImage').src = imageSrc;
-    }
+   
      // Fungsi untuk mengubah gambar utama
     function changeImage(imagePath) {
         document.getElementById('mainImage').src = imagePath;

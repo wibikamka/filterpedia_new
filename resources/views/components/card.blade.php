@@ -71,7 +71,7 @@
                         src="{{ asset('storage/img/logo/Tokopedia_Mascot.png') }}"
                         alt="Tokopedia"
                         draggable="false"
-                        class="w-10 h-10 lg:w-12 lg:h-12
+                        class="w-10 h-10 
                                object-contain cursor-pointer
                                hover:scale-110 transition-transform duration-200"
                     >
@@ -90,7 +90,7 @@
                         src="{{ asset('storage/img/logo/waicon1.png') }}"
                         alt="WhatsApp"
                         draggable="false"
-                        class="w-10 h-10 lg:w-12 lg:h-12
+                        class="w-10 h-10 
                                object-contain cursor-pointer
                                hover:scale-110 transition-transform duration-200"
                     >

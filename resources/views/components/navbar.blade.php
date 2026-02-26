@@ -6,7 +6,7 @@
         
         {{-- Left Section: Logo --}}
         <div class="flex items-center gap-3">
-            <a href="{{ url('/') }}" class="flex items-center gap-2">
+            <a href="{{ url('/') }}" title="Filterpedia - Filter Industri" class="flex items-center gap-2">
                 <img src="{{ asset('storage/img/logo/filterpedialastfilterpedia.png') }}" class="h-10 lg:h-16" alt="filterpedia Logo">
                 <span class="text-xl lg:text-3xl font-bold text-gray-900 dark:text-bluefilterpedia">
                     filterpedia

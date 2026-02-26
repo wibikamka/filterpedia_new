@@ -1,15 +1,29 @@
 @extends('layout.user')
 
-@section('title', 'Home')
-
+@section('title', 'Supplier Cartridge Filter & Water Treatment Industri | Filterpedia')
+@section('meta_description', 'Filterpedia adalah supplier cartridge filter, housing filter, dan solusi water treatment industri di Indonesia. Tersedia berbagai micron rating dan material untuk kebutuhan industri.')
+@section('structured_data')
+<script type="application/ld+json">
+@verbatim
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Filterpedia",
+  "url": "/"
+}
+@endverbatim
+</script>
+@endsection
 @section('content')
 
 {{-- COMPOSITE BANNER SECTION --}}
 <section class="mb-6 ">
     <div class="flex flex-col gap-3 sm:gap-4 lg:gap-6">
-        
+        <h1 class="sr-only">
+    Supplier Cartridge Filter dan Water Treatment Industri di Indonesia
+</h1>
         {{-- ROW 1: BIG BANNER --}}
-        <div class="w-full aspect-[14/5]">
+        <div class="w-full aspect-14/5">
             <div
                 x-data="slider(3, 4500)"
                 x-init="start()"
@@ -21,7 +35,7 @@
                             src="{{ asset("storage/img/banner/banner_caa-$i.png") }}"
                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                             :class="active === {{ $i - 1 }} ? 'opacity-100' : 'opacity-0'"
-                            alt="Main Banner {{ $i }}"
+                            alt="Supplier Cartridge Filter Industri - Filterpedia {{ $i }}"
                             loading="lazy">
                     @endfor
                     
@@ -81,7 +95,7 @@
                                     src="{{ asset("storage/img/bannersquare/square-$i.png") }}"
                                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                                     :class="active === {{ $i - 1 }} ? 'opacity-100' : 'opacity-0'"
-                                    alt="Square Banner {{ $j }}-{{ $i }}"
+                                    alt="Cartridge Filter 5 Micron untuk Water Treatment {{ $j }}-{{ $i }}"
                                     loading="lazy">
                             @endfor
                         </div>
@@ -91,12 +105,64 @@
         </div>
     </div>
 </section>
+<section class="relative py-6 md:py-12 md:px-0 overflow-hidden">
 
-<section class="category-bar py-6 px-4 sm:px-6 bg-white dark:bg-gray-900 shadow-sm mb-10 rounded-lg">
-    <div class="container mx-auto">
-        <h2 class="text-lg lg:text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
-            Kategori
-        </h2>
+    <div class="absolute -top-10 left-1/4 w-96 h-96 bg-bluefilterpedia dark:bg-blue-600 opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-10 right-1/4 w-96 h-96 bg-bluefilterpedia-sec dark:bg-cyan-600 opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative w-full
+                bg-white/40 dark:bg-white/5
+                backdrop-blur-xl
+                border-y border-white/50 dark:border-white/10
+                py-6 md:py-12 px-4 md:px-8">
+
+        <div class="max-w-4xl mx-auto text-center">
+
+            <h2 class="text-base md:text-2xl lg:text-3xl font-bold
+                       text-gray-900 dark:text-white
+                       mb-4 tracking-wide leading-snug">
+                Solusi Filtrasi Industri & Water Treatment
+            </h2>
+
+            {{-- Chip tags - compact di mobile, hidden di md ke atas --}}
+            <div class="flex flex-wrap justify-center gap-2 md:hidden">
+                @foreach(['Cartridge Filter', 'Housing Filter', 'Water Treatment', 'Farmasi', 'Food & Beverage'] as $tag)
+                    <span class="px-3 py-1 rounded-full text-xs font-medium
+                                 bg-blue-50 dark:bg-blue-900/30
+                                 text-bluefilterpedia dark:text-blue-300
+                                 border border-blue-200 dark:border-blue-700">
+                        {{ $tag }}
+                    </span>
+                @endforeach
+            </div>
+
+            {{-- Paragraf full - hanya di md ke atas --}}
+            <p class="hidden md:block text-gray-700 dark:text-gray-300 leading-relaxed md:text-base lg:text-lg">
+                Filterpedia menyediakan
+                <span class="font-semibold text-bluefilterpedia dark:text-blue-400">cartridge filter</span>,
+                <span class="font-semibold text-bluefilterpedia dark:text-blue-400">housing filter stainless steel</span>,
+                dan berbagai komponen
+                <span class="font-semibold text-bluefilterpedia dark:text-blue-400">water treatment</span>
+                untuk industri
+                <span class="italic">manufaktur, food & beverage, farmasi</span>,
+                dan pengolahan air limbah.
+            </p>
+
+        </div>
+    </div>
+</section>
+<section class="category-bar relative bg-white dark:bg-gray-900 shadow-sm mb-10 rounded-lg overflow-hidden">
+    
+    {{-- Badge "Kategori" pojok kiri atas --}}
+    <div class="absolute top-0 left-0 
+                bg-bluefilterpedia text-white 
+                px-5 py-2 pr-12 rounded-br-full
+                text-lg lg:text-2xl font-semibold">
+        Kategori
+    </div>
+
+    {{-- Konten dengan padding top lebih besar agar tidak tertimpa badge --}}
+    <div class="container mx-auto px-4 sm:px-6 pt-14 pb-6">
         <div class="grid
             grid-cols-3
             sm:grid-cols-4
@@ -104,103 +170,112 @@
             lg:grid-cols-6
             gap-6">
 
-
             @foreach($categories as $category)
                 <div class="flex flex-col items-center gap-3">
-    {{-- Lingkaran icon --}}
-    <a href="{{ route('product.category', $category->slug) }}"
-       class="flex items-center justify-center w-20 h-20 lg:w-40 lg:h-40 rounded-full 
-              border border-gray-200 dark:border-gray-700 hover:shadow-lg transition bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 overflow-hidden p-2"> {{-- Tambahkan padding agar gambar tidak terlalu mepet --}}
-        
-        @if($category->icon)
-            <img src="{{ asset('storage/' . $category->icon) }}" 
-                 alt="{{ $category->name }}" 
-                 class="w-full h-full object-contain"> {{-- Gunakan w-full h-full --}}
-        @endif
-    </a>
-
-    {{-- Nama kategori --}}
-    <span class="mt-2 text-center text-xs md:text-base lg:text-lg font-medium 
-                text-gray-800 dark:text-gray-200 truncate max-w-20 lg:max-w-40">
-        {{ $category->name }}
-    </span>
-</div>
+                    <a href="{{ route('product.category', $category->slug) }}"
+                       class="flex items-center justify-center w-full aspect-square rounded-full 
+                              border border-bluefilterpedia hover:shadow-lg transition 
+                              bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 
+                              overflow-hidden p-2">
+                        @if($category->icon)
+                            <img src="{{ asset('storage/' . $category->icon) }}" 
+                                 alt="{{ $category->name }}" 
+                                 class="w-full h-full object-contain">
+                        @endif
+                    </a>
+                    <span class="text-center text-xs md:text-base font-regular 
+                                text-gray-800 dark:text-gray-200 truncate w-full">
+                        {{ $category->name }}
+                    </span>
+                </div>
             @endforeach
 
         </div>
     </div>
 </section>
 
-{{-- BRAND & MARKETPLACE SECTION --}}
-<section class="py-6  mb-10">
+<section class="py-6 mb-10">
     <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
 
             {{-- BRAND SECTION --}}
-            <div class="bg-white dark:bg-gray-900 shadow-sm rounded-lg p-6">
-                <h2 class="text-lg lg:text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
+            <div class="relative bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden">
+                
+                {{-- Badge pojok kiri atas --}}
+                <div class="absolute top-0 left-0 
+                            bg-bluefilterpedia text-white 
+                            px-5 py-2 pr-12 rounded-br-full
+                            text-lg lg:text-2xl font-semibold">
                     Brand
-                </h2>
-                <div class="grid grid-cols-3 sm:grid-cols-4 gap-4">
+                </div>
 
-                    @foreach([
-                        ['img' => 'img/brand/veolia.png', 'name' => 'Brand 1'],
-                        ['img' => 'img/brand/nuvonic.png', 'name' => 'Brand 2'],
-                        ['img' => 'img/brand/suez.png', 'name' => 'Brand 3'],
-                        ['img' => 'img/brand/cpure.png', 'name' => 'Brand 4'],
-                        ['img' => 'img/brand/gemu.png', 'name' => 'Brand 5'],
-                        ['img' => 'img/brand/aqua.png', 'name' => 'Brand 6'],
-                        ['img' => 'brand/brand-7.png', 'name' => 'Brand 7'],
-                        ['img' => 'brand/brand-8.png', 'name' => 'Brand 8'],
-                    ] as $brand)
-                        <div class="flex flex-col items-center gap-2">
-                            <a href="#"
-                               class="flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 rounded-full
-                                      border border-gray-200 dark:border-gray-700 hover:shadow-lg transition
-                                      bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700
-                                      overflow-hidden p-2">
-                                <img src="{{ asset('storage/' . $brand['img']) }}"
-                                     alt="{{ $brand['name'] }}"
-                                     class="w-full h-full object-contain">
-                            </a>
-                            <span class="text-center text-xs md:text-sm font-medium
-                                         text-gray-800 dark:text-gray-200 truncate max-w-[64px] lg:max-w-[96px]">
-                                {{ $brand['name'] }}
-                            </span>
-                        </div>
-                    @endforeach
+                <div class="pt-14 p-6">
+                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
 
+                        @foreach([
+                            ['img' => 'img/brand/veolia.png',   'name' => 'Veolia'],
+                            ['img' => 'img/brand/nuvonic.png',  'name' => 'Nuvonic'],
+                            ['img' => 'img/brand/suez.png',     'name' => 'Suez'],
+                            ['img' => 'img/brand/cpure.png',    'name' => 'C-Pure'],
+                            ['img' => 'img/brand/gemu.png',     'name' => 'Gemu'],
+                            ['img' => 'img/brand/aqua.png',     'name' => 'Aquafine'],
+                            ['img' => 'img/brand/PENTAIR.png',  'name' => 'Pentair'],
+                            ['img' => 'img/brand/DUPONT.png',   'name' => 'Dupont'],
+                        ] as $brand)
+                            <div class="flex flex-col items-center gap-2">
+                                <a href="#"
+                                   class="flex items-center justify-center w-full aspect-square rounded-full
+                                          border border-bluefilterpedia-sec/50 dark:border-bluefilterpedia/50 hover:shadow-lg transition
+                                          bg-white overflow-hidden p-2">
+                                    <img src="{{ asset('storage/' . $brand['img']) }}"
+                                         alt="{{ $brand['name'] }}"
+                                         class="w-full h-full object-contain">
+                                </a>
+                                <span class="text-center text-base font-regular
+                                             text-gray-800 dark:text-gray-200 truncate w-full">
+                                    {{ $brand['name'] }}
+                                </span>
+                            </div>
+                        @endforeach
+
+                    </div>
                 </div>
             </div>
 
             {{-- MARKETPLACE SECTION --}}
-            <div class="bg-white dark:bg-gray-900 shadow-sm rounded-lg p-6">
-                <h2 class="text-lg lg:text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
+            <div class="relative bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden">
+
+                {{-- Badge pojok kiri atas --}}
+                <div class="absolute top-0 left-0 
+                            bg-bluefilterpedia text-white 
+                            px-5 py-2 pr-12 rounded-br-full
+                            text-lg lg:text-2xl font-semibold">
                     Marketplace
-                </h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                </div>
 
-                    @foreach([
-                        ['img' => 'img/logo/Tokopedia_Logo 1.png',  'name' => 'Tokopedia',  'url' => 'https://tokopedia.com'],
-                        ['img' => 'img/logo/tiktokshop.png',     'name' => 'Lazada',     'url' => 'https://lazada.co.id'],
-                        ['img' => 'img/logo/shopee.png',     'name' => 'Shopee',     'url' => 'https://shopee.co.id'],
-                        ['img' => 'img/logo/blibli.png',     'name' => 'Blibli',     'url' => 'https://blibli.com'],
-                        ['img' => 'img/logo/tiktok.png',     'name' => 'TikTok Shop','url' => 'https://tiktok.com/shop'],
-                        ['img' => 'img/logo/bukalapak.png',  'name' => 'Bukalapak',  'url' => 'https://bukalapak.com'],
-                    ] as $mp)
-                        <a href="{{ $mp['url'] }}"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="flex items-center justify-center rounded-lg aspect-[2/1]
-                                  border border-gray-200 dark:border-gray-700 hover:shadow-lg transition
-                                  bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700
-                                  overflow-hidden p-3">
-                            <img src="{{ asset('storage/' . $mp['img']) }}"
-                                 alt="{{ $mp['name'] }}"
-                                 class="w-full h-full object-contain">
-                        </a>
-                    @endforeach
+                <div class="pt-14 p-6">
+                    <div class="grid grid-cols-2 gap-4">
 
+                        @foreach([
+                            ['img' => 'img/logo/Tokopedia_Logo 1.png',       'name' => 'Tokopedia',   'url' => 'https://www.tokopedia.com/filterpedia-co-id'],
+                            ['img' => 'img/logo/tiktokshop.png',             'name' => 'TikTok Shop', 'url' => 'https://www.tiktok.com/@filterpedia.co.id'],
+                            ['img' => 'img/logo/shopee.png',                 'name' => 'Shopee',      'url' => 'https://shopee.co.id'],
+                            ['img' => 'img/logo/Digital_Inline_Green.png',   'name' => 'WhatsApp',    'url' => 'https://wa.me/6281110058788?text=Halo filterpedia'],
+                        ] as $mp)
+                            <a href="{{ $mp['url'] }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="flex items-center justify-center rounded-lg aspect-2/1
+                                      border border-bluefilterpedia-sec/50 dark:border-gray-700 hover:shadow-lg transition
+                                      bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700
+                                      overflow-hidden p-3">
+                                <img src="{{ asset('storage/' . $mp['img']) }}"
+                                     alt="{{ $mp['name'] }}"
+                                     class="w-full h-full object-contain">
+                            </a>
+                        @endforeach
+
+                    </div>
                 </div>
             </div>
 
@@ -208,12 +283,11 @@
     </div>
 </section>
 
-
 {{-- PRODUCT LIST SECTION --}}
 <section id="produk-terbaru" class="pb-20">
     <div class="container mx-auto">
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">
                 Produk Terbaru
             </h2>
         </div>

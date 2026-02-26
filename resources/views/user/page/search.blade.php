@@ -1,6 +1,70 @@
 @extends('layout.user')
 
-@section('title', 'Pencarian Produk')
+@section('title', $q ? "Hasil pencarian \"$q\" | Filterpedia" : "Cari Produk | Filterpedia")
+@section('meta_description')
+{{ $q 
+    ? "Hasil pencarian untuk \"$q\" di Filterpedia. Temukan produk filter industri terbaik sesuai kebutuhan Anda."
+    : "Cari produk filter industri terbaik di Filterpedia. Lihat produk terbaru dan rekomendasi kami." 
+}}
+@endsection
+
+@if(!$q)
+@section('meta_robots', 'noindex, follow')
+@endif
+
+@section('structured_data')
+@php
+$breadcrumbSchema = [
+    "@context" => "https://schema.org",
+    "@type" => "BreadcrumbList",
+    "itemListElement" => [
+        [
+            "@type" => "ListItem",
+            "position" => 1,
+            "name" => "Home",
+            "item" => url('/')
+        ],
+        [
+            "@type" => "ListItem",
+            "position" => 2,
+            "name" => "Search",
+            "item" => url()->current()
+        ]
+    ]
+];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+</script>
+
+{{-- Structured Data Produk --}}
+@if($products->count())
+@php
+$productsSchema = $products->map(function($p){
+    return [
+        "@context" => "https://schema.org",
+        "@type" => "Product",
+        "name" => $p->name,
+        "image" => $p->primaryImage ? asset('storage/'.$p->primaryImage->path) : null,
+        "description" => Str::limit(strip_tags($p->description), 200),
+        "sku" => $p->sku,
+        "offers" => [
+            "@type" => "Offer",
+            "priceCurrency" => "IDR",
+            "price" => $p->price,
+            "availability" => $p->stock>0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "url" => route('product.show', $p)
+        ]
+    ];
+})->toArray();
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode($productsSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endif
+@endsection
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 py-6">

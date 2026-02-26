@@ -9,10 +9,60 @@
 /* Custom Theme */
 @theme {
     --color-bluefilterpedia: #0077ba;
-    --color-bluefilterpedia-600: #083c82;
+    --color-bluefilterpedia-sec: #0672b7;
 }
 
 /* Dark mode override */
 .dark {
     --color-bluefilterpedia: #0077ba;
+}
+
+.button-container {
+    width: 3.5rem; /* 56px - sesuai icon w-12 (48px) + padding */
+    height: 3.5rem; /* 56px */
+    transition: width 0.3s ease-in-out;
+    padding-right: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .button-container {
+        width: 4.5rem; /* 72px - sesuai icon w-16 (64px) + padding */
+        height: 4.5rem; /* 72px */
+    }
+}
+
+/* Text tersembunyi by default */
+.button-text {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+    transition:
+        opacity 0.3s ease-in-out,
+        width 0.3s ease-in-out,
+        margin-left 0.3s ease-in-out;
+}
+
+/* Hover state - expand dengan text */
+.floating-button:hover .button-container {
+    width: 11rem; /* 176px */
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .floating-button:hover .button-container {
+        width: 13rem; /* 208px */
+    }
+}
+
+/* Text muncul saat hover */
+.floating-button:hover .button-text {
+    opacity: 1;
+    width: auto;
+    margin-left: 0.75rem;
+}
+
+/* Hover effect untuk ring */
+.floating-button:hover .ring-green-500,
+.floating-button:hover .ring-green-600 {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
 }

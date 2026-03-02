@@ -32,11 +32,11 @@
                 <div class="relative w-full h-full">
                     @for ($i = 1; $i <= 3; $i++)
                         <img
-                            src="{{ asset("storage/img/banner/banner_caa-$i.png") }}"
+                            src="{{ asset("storage/img/banner/banner_caa-$i.webp") }}"
                             class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                             :class="active === {{ $i - 1 }} ? 'opacity-100' : 'opacity-0'"
                             alt="Supplier Cartridge Filter Industri - Filterpedia {{ $i }}"
-                            loading="lazy">
+                            loading="eager">
                     @endfor
                     
                     {{-- Navigation Buttons --}}
@@ -92,7 +92,7 @@
                         <div class="relative w-full h-full">
                             @for ($i = 1; $i <= 3; $i++)
                                 <img
-                                    src="{{ asset("storage/img/bannersquare/square-$i.png") }}"
+                                    src="{{ asset("storage/img/bannersquare/square-$i.webp") }}"
                                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                                     :class="active === {{ $i - 1 }} ? 'opacity-100' : 'opacity-0'"
                                     alt="Cartridge Filter 5 Micron untuk Water Treatment {{ $j }}-{{ $i }}"

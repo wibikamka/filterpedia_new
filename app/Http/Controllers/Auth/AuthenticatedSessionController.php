@@ -28,7 +28,13 @@ public function store(LoginRequest $request): RedirectResponse
 
     $request->session()->regenerate();
 
-    return redirect()->intended(route('admin.product.index'));
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.product.index');
+    }
+
+    return redirect()->intended(route('home'));
 }
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Providers;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use App\View\Composers\NavbarComposer;
+use App\Services\ImageService;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+                $this->app->singleton(ImageService::class, function ($app) {
+            return new ImageService();
+        });
     }
 
     /**
@@ -25,5 +30,6 @@ public function boot()
     if (str_starts_with(env('APP_URL'), 'https://')) {
         URL::forceScheme('https');
     }
+        View::composer('components.navbar', NavbarComposer::class);
 }
 }

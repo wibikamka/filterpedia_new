@@ -17,11 +17,15 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+protected $fillable = [
+    'name',
+    'username',
+    'email',
+    'phone',
+    'bio',
+    'avatar',
+    'password',
+];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +49,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    protected static function booted()
+{
+    static::created(function ($user) {
+        $user->preference()->create();
+    });
+}
+
+    public function cart()
+{
+    return $this->hasOne(Cart::class);
+}
+public function addresses()
+{
+    return $this->hasMany(Address::class);
+}
+
+public function preference()
+{
+    return $this->hasOne(UserPreference::class);
+}
 }

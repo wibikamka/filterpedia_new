@@ -12,7 +12,7 @@ class HomeController extends Controller
     {
         $products = Product::where('is_active', 1)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(20);
         $categories = Category::where('is_active', 1)->get();
 
         return view('user.page.home', compact('products','categories'));

@@ -52,12 +52,16 @@ class ProductController extends Controller
             'is_active'        => 'required|boolean',
             'images.*'         => 'nullable|image|max:2048',
             'primary_image_id' => 'nullable|exists:product_images,id',
+            'specifications'    => 'nullable|array',
+            'specifications.*.key' => 'nullable|string|max:255',
+            'specifications.*.value' => 'nullable|string|max:65535',
         ]);
 
         $service->create(
             $data,
             $request->file('images', []),
-            $request->input('primary_image_id')
+            $request->input('primary_image_id'),
+            $request->input('specifications', [])
         );
 
         return redirect()
@@ -87,6 +91,9 @@ class ProductController extends Controller
             'images.*'         => 'nullable|image|max:2048',
             'primary_image_id' => 'nullable|exists:product_images,id',
             'deleted_images.*' => 'nullable|exists:product_images,id',
+            'specifications'    => 'nullable|array',
+            'specifications.*.key' => 'nullable|string|max:255',
+            'specifications.*.value' => 'nullable|string|max:65535',
         ]);
 
         $service->update(
@@ -94,7 +101,8 @@ class ProductController extends Controller
             $data,
             $request->file('images', []),
             $request->input('primary_image_id'),
-            $request->input('deleted_images', [])
+            $request->input('deleted_images', []),
+            $request->input('specifications', [])
         );
 
         return redirect()

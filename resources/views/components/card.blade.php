@@ -56,7 +56,7 @@
             </div>
 
             {{-- ACTION ICONS --}}
-            <div class="flex items-center gap-2">
+            <!-- <div class="flex items-center gap-2">
 
                 {{-- Tokopedia --}}
                 @if ($product->tokopedia_link)
@@ -96,7 +96,7 @@
                     >
                 </a>
 
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

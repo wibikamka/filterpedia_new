@@ -89,10 +89,10 @@
                             <a href="{{ url('/') }}" class="hover:underline hover:text-bluefilterpedia">Home</a>
                         </li>
                         <li class="mb-4">
-                            <a href="#produk-terbaru" class="hover:underline hover:text-bluefilterpedia">Products</a>
+                            <a href="{{ url('/blog') }}" class="hover:underline hover:text-bluefilterpedia">blog</a>
                         </li>
                         <li>
-                            <a href="{{ url('#') }}" class="hover:underline hover:text-bluefilterpedia">About</a>
+                            <a href="{{ url('/about') }}" class="hover:underline hover:text-bluefilterpedia">About</a>
                         </li>
                     </ul>
                 </div>
@@ -102,10 +102,13 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Follow us</h2>
                     <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline hover:text-bluefilterpedia">Instagram</a>
+                            <a href="https://www.instagram.com/filterpedia.id" target="_blank" class="hover:underline hover:text-bluefilterpedia">Instagram</a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="https://www.linkedin.com/in/filterpedia-b826a6236" target="_blank" class="hover:underline hover:text-bluefilterpedia">LinkedIn</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline hover:text-bluefilterpedia">Tokopedia</a>
+                            <a href="https://www.tokopedia.com/filterpedia-co-id" target="_blank" class="hover:underline hover:text-bluefilterpedia">Tokopedia</a>
                         </li>
                     </ul>
                 </div>
@@ -115,10 +118,10 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Legal</h2>
                     <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline hover:text-bluefilterpedia">Privacy Policy</a>
+                            <a href="{{ url('/privacy-policy') }}" class="hover:underline hover:text-bluefilterpedia">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline hover:text-bluefilterpedia">Terms &amp; Conditions</a>
+                            <a href="{{ url('/terms') }}" class="hover:underline hover:text-bluefilterpedia">Terms &amp; Conditions</a>
                         </li>
                     </ul>
                 </div>
@@ -137,16 +140,21 @@
 
             {{-- Social Media Icons --}}
             <div class="mt-4 flex gap-5 sm:mt-0 sm:justify-center">
-                {{-- Facebook --}}
-                <a href="#" class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
-                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
+                {{-- Linkedin --}}
+                <a href="https://www.linkedin.com/in/filterpedia-b826a6236" 
+                target="_blank"
+                class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
+
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" 
+                        fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.53-1 1.83-2.2 3.77-2.2C20.4 8 22 10.03 22 13.1V24h-4v-9.6c0-2.3-.82-3.9-2.9-3.9-1.58 0-2.52 1.06-2.94 2.08-.15.36-.19.86-.19 1.36V24h-4V8z"/>
                     </svg>
-                    <span class="sr-only">Facebook page</span>
+
+                    <span class="sr-only">LinkedIn</span>
                 </a>
 
                 {{-- Instagram --}}
-                <a href="#" class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
+                <a href="https://www.instagram.com/filterpedia.id" onclick="window.location='instagram://user?username=filterpedia.id';return false;" class="text-gray-600 dark:text-gray-200 hover:text-bluefilterpedia transition-colors">
                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.5-.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>
                     </svg>

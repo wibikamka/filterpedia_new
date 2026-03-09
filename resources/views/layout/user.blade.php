@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     {{-- Basic Meta --}}
@@ -42,9 +42,11 @@ overflow-x-hidden transition-colors duration-300">
 
     {{-- Navbar --}}
     <x-navbar />
-
+    @hasSection('full-width-content')
+        @yield('full-width-content') {{-- TANPA CONTAINER --}}
+    @else
     {{-- Content --}}
-<main class="container mx-auto px-4 sm:px-6 lg:px-24 py-4 lg:py-8 min-h-screen">
+<main class="container mx-auto px-4 sm:px-6 lg:px-16 2xl:px-32 min-h-screen">
     
     {{-- WhatsApp Button --}}
     <a 
@@ -98,7 +100,7 @@ overflow-x-hidden transition-colors duration-300">
 
     @yield('content')
 </main>
-
+@endif
     {{-- Footer --}}
     <x-footer />
 

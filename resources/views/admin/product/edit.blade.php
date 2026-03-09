@@ -1,3 +1,4 @@
+{{-- resources/views/admin/product/edit.blade.php --}}
 @extends('layout.admin')
 
 @section('title', 'Edit Produk')
@@ -31,9 +32,12 @@
             type="text"
             name="sku"
             value="{{ old('sku', $product->sku) }}"
-            class="border p-2 w-full"
+            class="border p-2 w-full @error('sku') border-red-500 @enderror"
             required
         >
+        @error('sku')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Nama --}}
@@ -43,15 +47,18 @@
             type="text"
             name="name"
             value="{{ old('name', $product->name) }}"
-            class="border p-2 w-full"
+            class="border p-2 w-full @error('name') border-red-500 @enderror"
             required
         >
+        @error('name')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Kategori --}}
     <div>
         <label class="block font-semibold mb-1">Kategori</label>
-        <select name="category_id" class="border p-2 w-full" required>
+        <select name="category_id" class="border p-2 w-full @error('category_id') border-red-500 @enderror" required>
             @foreach ($categories as $category)
                 <option
                     value="{{ $category->id }}"
@@ -61,6 +68,9 @@
                 </option>
             @endforeach
         </select>
+        @error('category_id')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Harga --}}
@@ -71,9 +81,13 @@
             name="price"
             value="{{ old('price', $product->price) }}"
             min="0"
-            class="border p-2 w-full"
+            step="0.01"
+            class="border p-2 w-full @error('price') border-red-500 @enderror"
             required
         >
+        @error('price')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Stok --}}
@@ -84,9 +98,12 @@
             name="stock"
             value="{{ old('stock', $product->stock) }}"
             min="0"
-            class="border p-2 w-full"
+            class="border p-2 w-full @error('stock') border-red-500 @enderror"
             required
         >
+        @error('stock')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Deskripsi --}}
@@ -95,8 +112,11 @@
         <textarea
             name="description"
             rows="4"
-            class="border p-2 w-full"
+            class="border p-2 w-full @error('description') border-red-500 @enderror"
         >{{ old('description', $product->description) }}</textarea>
+        @error('description')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Tokopedia --}}
@@ -106,8 +126,11 @@
             type="url"
             name="tokopedia_link"
             value="{{ old('tokopedia_link', $product->tokopedia_link) }}"
-            class="border p-2 w-full"
+            class="border p-2 w-full @error('tokopedia_link') border-red-500 @enderror"
         >
+        @error('tokopedia_link')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     {{-- Status --}}
@@ -119,9 +142,100 @@
         </select>
     </div>
 
+    {{-- ===== SECTION SPESIFIKASI PRODUK (ADD-ON) ===== --}}
+    <div class="border-t pt-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold">Spesifikasi Produk</h2>
+            <button 
+                type="button" 
+                id="add-specification"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center gap-2"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Tambah Spesifikasi
+            </button>
+        </div>
+        
+        <p class="text-gray-600 text-sm mb-4">Tambahkan spesifikasi produk seperti: Berat, Dimensi, Warna, Bahan, dll.</p>
+        
+        <div id="specifications-container" class="space-y-3">
+            {{-- Loop untuk spesifikasi yang sudah ada --}}
+            @php
+                $existingSpecs = old('specifications', $product->specifications->toArray());
+            @endphp
+            
+            @foreach ($existingSpecs as $index => $spec)
+                <div class="specification-item flex gap-3 items-start">
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            name="specifications[{{ $index }}][key]" 
+                            value="{{ is_array($spec) ? $spec['spec_key'] ?? $spec['key'] ?? '' : $spec->spec_key ?? '' }}"
+                            placeholder="Nama spesifikasi (contoh: Berat)"
+                            class="border p-2 w-full"
+                            required
+                        >
+                    </div>
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            name="specifications[{{ $index }}][value]" 
+                            value="{{ is_array($spec) ? $spec['spec_value'] ?? $spec['value'] ?? '' : $spec->spec_value ?? '' }}"
+                            placeholder="Nilai spesifikasi (contoh: 1 kg)"
+                            class="border p-2 w-full"
+                            required
+                        >
+                    </div>
+                    <button 
+                        type="button" 
+                        class="remove-specification bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            @endforeach
+        </div>
+        
+        {{-- Template untuk spesifikasi baru (disembunyikan) --}}
+        <template id="specification-template">
+            <div class="specification-item flex gap-3 items-start">
+                <div class="flex-1">
+                    <input 
+                        type="text" 
+                        name="specifications[__INDEX__][key]" 
+                        placeholder="Nama spesifikasi (contoh: Berat)"
+                        class="border p-2 w-full"
+                        required
+                    >
+                </div>
+                <div class="flex-1">
+                    <input 
+                        type="text" 
+                        name="specifications[__INDEX__][value]" 
+                        placeholder="Nilai spesifikasi (contoh: 1 kg)"
+                        class="border p-2 w-full"
+                        required
+                    >
+                </div>
+                <button 
+                    type="button" 
+                    class="remove-specification bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </template>
+    </div>
+
     {{-- Existing Images --}}
     @if ($product->images->count())
-        <div>
+        <div class="border-t pt-6">
             <label class="block font-semibold mb-2">Pilih Gambar Utama</label>
 
             <div id="existing-images" class="grid grid-cols-5 gap-4">
@@ -135,16 +249,19 @@
                             class="absolute top-1 right-1 bg-red-600 text-white text-xs px-1 rounded remove-existing"
                         >✕</button>
 
-                        <input
-                            type="radio"
-                            name="primary_image_id"
-                            value="{{ $image->id }}"
-                            {{ $image->is_primary ? 'checked' : '' }}
-                        >
+                        <div class="text-center">
+                            <input
+                                type="radio"
+                                name="primary_image_id"
+                                value="{{ $image->id }}"
+                                {{ $image->is_primary ? 'checked' : '' }}
+                                class="mb-1"
+                            >
+                        </div>
 
                         <img
                             src="{{ asset('storage/'.$image->path) }}"
-                            class="border rounded"
+                            class="border rounded w-full h-32 object-cover"
                         >
                     </div>
                 @endforeach
@@ -163,7 +280,9 @@
             name="images[]"
             multiple
             accept="image/*"
+            class="border p-2 w-full"
         >
+        <p class="text-gray-500 text-sm mt-1">Format: JPG, PNG, GIF. Maks: 2MB per file</p>
     </div>
 
     <div id="new-images-preview" class="grid grid-cols-5 gap-4 mt-3"></div>
@@ -177,9 +296,8 @@
             Update Produk
         </button>
 
-        
-            <a href="{{ route('admin.product.index') }}"
-            class="rounded border px-6 py-2"
+        <a href="{{ route('admin.product.index') }}"
+            class="rounded border px-6 py-2 hover:bg-gray-100"
         >
             Batal
         </a>
@@ -242,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var img = document.createElement('img')
             img.src = URL.createObjectURL(file)
-            img.className = 'border rounded'
+            img.className = 'border rounded w-full h-32 object-cover'
 
             var btn = document.createElement('button')
             btn.type = 'button'
@@ -274,6 +392,101 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         input.files = dt.files
     }
+    
+    // ===== FITUR SPESIFIKASI (ADD-ON) =====
+    var specContainer = document.getElementById('specifications-container')
+    var addButton = document.getElementById('add-specification')
+    var template = document.getElementById('specification-template')
+    
+    // Hitung index untuk spesifikasi baru
+    function getNextIndex() {
+        var items = document.querySelectorAll('.specification-item')
+        return items.length
+    }
+    
+    // Fungsi untuk menambah spesifikasi baru
+    function addSpecification() {
+        var index = getNextIndex()
+        var clone = template.content.cloneNode(true)
+        var html = clone.querySelector('.specification-item').outerHTML
+        
+        // Ganti placeholder __INDEX__ dengan index yang sesuai
+        html = html.replace(/__INDEX__/g, index)
+        
+        // Buat elemen div baru
+        var div = document.createElement('div')
+        div.innerHTML = html
+        var newItem = div.firstElementChild
+        
+        // Tambahkan event listener untuk tombol remove
+        var removeBtn = newItem.querySelector('.remove-specification')
+        removeBtn.addEventListener('click', function(e) {
+            e.target.closest('.specification-item').remove()
+            // Rename indices setelah penghapusan
+            renameSpecificationIndices()
+        })
+        
+        specContainer.appendChild(newItem)
+    }
+    
+    // Fungsi untuk merename index setelah penghapusan
+    function renameSpecificationIndices() {
+        var items = document.querySelectorAll('.specification-item')
+        items.forEach(function(item, index) {
+            var keyInput = item.querySelector('input[name*="[key]"]')
+            var valueInput = item.querySelector('input[name*="[value]"]')
+            
+            if (keyInput) {
+                keyInput.name = `specifications[${index}][key]`
+            }
+            if (valueInput) {
+                valueInput.name = `specifications[${index}][value]`
+            }
+        })
+    }
+    
+    // Event listener untuk tombol tambah spesifikasi
+    if (addButton) {
+        addButton.addEventListener('click', addSpecification)
+    }
+    
+    // Event listener untuk tombol remove yang sudah ada
+    document.querySelectorAll('.remove-specification').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.target.closest('.specification-item').remove()
+            renameSpecificationIndices()
+        })
+    })
+    
+    // Jika tidak ada spesifikasi, tambahkan satu baris kosong sebagai contoh
+    if (specContainer.children.length === 0) {
+        addSpecification()
+    }
 })
 </script>
+
+<style>
+.specification-item {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-item {
+    transition: transform 0.2s;
+}
+
+.image-item:hover {
+    transform: scale(1.05);
+}
+</style>
 @endsection

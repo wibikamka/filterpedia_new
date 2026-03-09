@@ -9,7 +9,7 @@
 /* Custom Theme */
 @theme {
     --color-bluefilterpedia: #0077ba;
-    --color-bluefilterpedia-sec: #0672b7;
+    --color-bluefilterpedia-sec: #00416b;
 }
 
 /* Dark mode override */
@@ -65,4 +65,35 @@
 .floating-button:hover .ring-green-500,
 .floating-button:hover .ring-green-600 {
     box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+}
+/* Hilangkan spinner untuk Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hilangkan spinner untuk Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+/* app.css */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14, 165, 233, 0.3) transparent;
+}
+*::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background: rgba(14, 165, 233, 0.35);
+    border-radius: 100px;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: rgba(14, 165, 233, 0.6);
 }

@@ -4,21 +4,30 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductService
-{
+{   
+        protected $imageService; // 🔥 TAMBAHKAN PROPERTY
+
+    // 🔥 TAMBAHKAN CONSTRUCTOR UNTUK DEPENDENCY INJECTION
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     /* =======================
      * CREATE PRODUCT
      * ======================= */
     public function create(
         array $data,
         array $images = [],
-        ?int $primaryImageId = null
+        ?int $primaryImageId = null,
+        array $specifications = [] // 🔥 TAMBAHKAN PARAMETER INI
     ): Product {
-        return DB::transaction(function () use ($data, $images, $primaryImageId) {
+        return DB::transaction(function () use ($data, $images, $primaryImageId, $specifications) {
 
             $data['slug'] = $this->generateUniqueSlug($data['name']);
 
@@ -32,6 +41,11 @@ class ProductService
                 $this->setPrimaryImage($product, $primaryImageId);
             }
 
+            // 🔥 TAMBAHKAN HANDLE SPECIFICATIONS
+            if (!empty($specifications)) {
+                $this->handleSpecifications($product, $specifications);
+            }
+
             return $product;
         });
     }
@@ -39,67 +53,72 @@ class ProductService
     /* =======================
      * UPDATE PRODUCT
      * ======================= */
-public function update(
-    Product $product,
-    array $data,
-    array $newImages = [],
-    ?int $primaryImageId = null,
-    array $deletedImageIds = []
-): Product {
-    return DB::transaction(function () use (
-        $product,
-        $data,
-        $newImages,
-        $primaryImageId,
-        $deletedImageIds
-    ) {
-
-        // 🔹 slug update
-        if (isset($data['name']) && $data['name'] !== $product->name) {
-            $data['slug'] = $this->generateUniqueSlug(
-                $data['name'],
-                $product->id
-            );
-        }
-
-        $product->update($data);
-
-        // 🔥 DELETE IMAGES (INI YANG HILANG)
-        if (!empty($deletedImageIds)) {
-            ProductImage::where('product_id', $product->id)
-                ->whereIn('id', $deletedImageIds)
-                ->get()
-                ->each(function ($image) {
-                    Storage::disk('public')->delete($image->path);
-                    $image->delete();
-                });
-        }
-
-        if (!empty($newImages)) {
-            $this->attachImages($product, $newImages);
-        }
-
-     
-        if ($primaryImageId) {
-            $this->setPrimaryImage($product, $primaryImageId);
-        }
-
-       
-        if (
-            !$product->images()
-                ->where('is_primary', true)
-                ->exists()
+    public function update(
+        Product $product,
+        array $data,
+        array $newImages = [],
+        ?int $primaryImageId = null,
+        array $deletedImageIds = [],
+        array $specifications = [] 
+    ): Product {
+        return DB::transaction(function () use (
+            $product,
+            $data,
+            $newImages,
+            $primaryImageId,
+            $deletedImageIds,
+            $specifications 
         ) {
-            $product->images()
-                ->orderBy('id')
-                ->limit(1)
-                ->update(['is_primary' => true]);
-        }
 
-        return $product;
-    });
-}
+            // 🔹 slug update
+            if (isset($data['name']) && $data['name'] !== $product->name) {
+                $data['slug'] = $this->generateUniqueSlug(
+                    $data['name'],
+                    $product->id
+                );
+            }
 
+            $product->update($data);
+
+            // 🔥 DELETE IMAGES
+            if (!empty($deletedImageIds)) {
+                ProductImage::where('product_id', $product->id)
+                    ->whereIn('id', $deletedImageIds)
+                    ->get()
+                    ->each(function ($image) {
+                        $this->imageService->deleteImage($image->path); 
+                        $image->delete();
+                    });
+            }
+
+            if (!empty($newImages)) {
+                $this->attachImages($product, $newImages);
+            }
+
+            if ($primaryImageId) {
+                $this->setPrimaryImage($product, $primaryImageId);
+            }
+
+            // 🔥 TAMBAHKAN HANDLE SPECIFICATIONS
+            if (!empty($specifications)) {
+                $this->handleSpecifications($product, $specifications);
+            }
+
+            // Fallback primary image jika tidak ada
+            if (
+                !$product->images()
+                    ->where('is_primary', true)
+                    ->exists()
+            ) {
+                $product->images()
+                    ->orderBy('id')
+                    ->limit(1)
+                    ->update(['is_primary' => true]);
+            }
+
+            return $product;
+        });
+    }
 
     /* =======================
      * DELETE PRODUCT
@@ -109,7 +128,7 @@ public function update(
         DB::transaction(function () use ($product) {
 
             foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image->path);
+                $this->imageService->deleteImage($image->path);
             }
 
             $product->images()->delete();
@@ -123,7 +142,7 @@ public function update(
     public function attachImages(Product $product, array $images): void 
     {
         foreach ($images as $file) {
-            $path = $file->store('products', 'public');
+            $path = $this->imageService->convertToWebP($file, 'products');
 
             ProductImage::create([
                 'product_id' => $product->id,
@@ -152,7 +171,7 @@ public function update(
     {
         DB::transaction(function () use ($image) {
 
-            Storage::disk('public')->delete($image->path);
+            $this->imageService->deleteImage($image->path);
 
             $productId = $image->product_id;
             $wasPrimary = $image->is_primary;
@@ -204,5 +223,29 @@ public function update(
         }
 
         return $slug;
+    }
+
+    /**
+     * Handle specifications untuk produk
+     */
+    private function handleSpecifications(Product $product, array $specifications): void
+    {
+        // Hapus semua spesifikasi lama
+        $product->specifications()->delete();
+        
+        $sortOrder = 0;
+        
+        foreach ($specifications as $spec) {
+            // Skip jika key atau value kosong
+            if (empty($spec['key']) || empty($spec['value'])) {
+                continue;
+            }
+            
+            $product->specifications()->create([
+                'spec_key' => $spec['key'],
+                'spec_value' => $spec['value'],
+                'sort_order' => $sortOrder++
+            ]);
+        }
     }
 }

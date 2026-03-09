@@ -2,7 +2,7 @@
     action="{{ route('search.index') }}"
     method="GET"
     data-search
-    class="relative w-full max-w-md"
+    class="relative w-full" {{-- Ubah dari max-w-md menjadi w-full --}}
 >
     <input
         type="text"
@@ -13,14 +13,14 @@
         class="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm
                bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
                focus:border-bluefilterpedia focus:outline-none
-                transition-colors duration-300"
-               placeholder:text-gray-500"
+               transition-colors duration-300"
+        placeholder="Cari produk…"
     >
-   
+    
     <div
         data-search-dropdown
         class="absolute left-0 top-full z-[9999] mt-2 hidden
-               w-full md:w-[calc(100%+50px)] 
+               w-full {{-- Hapus md:w-[calc(100%+50px)] karena sudah full --}}
                rounded-lg border 
                bg-white dark:bg-gray-800
                text-gray-900 dark:text-gray-100 

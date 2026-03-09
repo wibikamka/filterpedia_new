@@ -51,5 +51,8 @@ class Product extends Model
             ->orderBy('sort_order');
     }
 
-
+public function specifications()
+{
+    return $this->hasMany(ProductSpecification::class);
+}
 }

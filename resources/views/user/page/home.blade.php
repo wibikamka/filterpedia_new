@@ -259,7 +259,7 @@
                         @foreach([
                             ['img' => 'img/logo/Tokopedia_Logo 1.png',       'name' => 'Tokopedia',   'url' => 'https://www.tokopedia.com/filterpedia-co-id'],
                             ['img' => 'img/logo/tiktokshop.png',             'name' => 'TikTok Shop', 'url' => 'https://www.tiktok.com/@filterpedia.co.id'],
-                            ['img' => 'img/logo/shopee.png',                 'name' => 'Shopee',      'url' => 'https://shopee.co.id'],
+                       
                             ['img' => 'img/logo/Digital_Inline_Green.png',   'name' => 'WhatsApp',    'url' => 'https://wa.me/6281110058788?text=Halo filterpedia'],
                         ] as $mp)
                             <a href="{{ $mp['url'] }}"

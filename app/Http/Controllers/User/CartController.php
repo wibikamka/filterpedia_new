@@ -153,7 +153,7 @@ public function remove(Request $request, $id)
 
         $message .= "\nTotal: Rp " . number_format($total, 0, ',', '.');
 
-        $phone = "6281282388324"; 
+        $phone = "6281110058788"; 
 
         return redirect("https://wa.me/{$phone}?text=" . urlencode($message));
     }

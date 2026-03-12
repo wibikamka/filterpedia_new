@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/update-bio', [ProfileController::class, 'updateBio'])->name('update-bio');
         Route::patch('/update-email', [ProfileController::class, 'updateEmail'])->name('update-email');
         Route::patch('/update-phone', [ProfileController::class, 'updatePhone'])->name('update-phone');
-        Route::post('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('update-avatar');
+        Route::patch('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('update-avatar');
     });
 
     // CART ROUTES - Masih dalam group auth yang sama

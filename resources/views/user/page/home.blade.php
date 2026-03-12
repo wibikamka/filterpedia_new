@@ -22,7 +22,7 @@
     :showDots="true"
     class="mb-10"
     :autoplaySpeed="4500"
-    :minHeight="'min-h-50 sm:min-h-75 md:min-h-80 lg:min-h-87.5 2xl:min-h-125'"
+    :minHeight="'min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] 2xl:min-h-[65vh]'"
 />
 
 <section class="category-bar relative bg-white dark:bg-gray-900 mb-10 rounded-lg">

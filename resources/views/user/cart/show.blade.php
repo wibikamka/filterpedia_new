@@ -319,7 +319,7 @@ function recalcSummary() {
         message += `\nSubtotal: ${formatRupiah(subtotal)}`;
         message += `\nPPN 12%: ${formatRupiah(ppn)}`;
         message += `\nTotal: ${formatRupiah(total)}`;
-        waBtn.href = `https://wa.me/6281282388324?text=${encodeURIComponent(message)}`;
+        waBtn.href = `https://wa.me/6281110058788?text=${encodeURIComponent(message)}`;
     } else {
         waBtn.classList.add('opacity-50', 'pointer-events-none');
         waBtn.href = '#';

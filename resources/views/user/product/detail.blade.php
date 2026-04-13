@@ -2,8 +2,8 @@
 @extends('layout.user')
 
 @section('title', $product->name . ' - ' . ($product->category->name ?? '') . ' | Filterpedia')
-@section('meta_description', 
-Str::limit(strip_tags($product->description), 155))
+@section('meta_description', Str::limit(strip_tags($product->description), 155))
+
 @section('structured_data')
 @php
 $productSchema = [
@@ -68,6 +68,7 @@ $breadcrumbSchema = [
 {!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
 </script>
 @endsection
+
 @section('content')
 <div class="mx-auto py-4 px-4">
 @php
@@ -91,12 +92,14 @@ $breadcrumbSchema = [
 <x-breadcrumb :links="$breadcrumbs" />
 
 </div>
-<section class="border-t-4 border-bluefilterpedia bg-white dark:bg-gray-800  p-6 md:p-8">
+
+{{-- MAIN PRODUCT SECTION --}}
+<section class="border-t-4 border-bluefilterpedia bg-white dark:bg-gray-800 p-6 md:p-8">
     <div class="mx-auto max-w-7xl">
         {{-- GRID LAYOUT DUA KOLOM --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             
-            {{-- KOLOM KIRI: GAMBAR --}}
+            {{-- KOLOM KIRI: GAMBAR (Sama seperti sebelumnya) --}}
             <div class="lg:sticky lg:top-24 lg:h-fit">
                 {{-- Gambar Utama --}}
                 <div class="mb-6">
@@ -118,7 +121,7 @@ $breadcrumbSchema = [
                     </div>
                 </div>
 
-                {{-- Gallery --}}
+                {{-- Gallery (Sama seperti sebelumnya) --}}
                 @if ($product->images->count() > 1)
                     <div class="relative">
                         <button 
@@ -172,19 +175,17 @@ $breadcrumbSchema = [
                 @endif
             </div>
 
-            {{-- KOLOM KANAN --}}
+            {{-- KOLOM KANAN: Informasi Produk & Tombol Aksi (Sama seperti sebelumnya) --}}
             <div>
                 {{-- Product Name --}}
                 <h1 class="mb-5 text-xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100 leading-snug">
                     {{ $product->name }}
                 </h1>
 
-                {{-- ===== INFO TABLE ===== --}}
+                {{-- INFO TABLE --}}
                 <div class="w-full border border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden mb-8">
                     <table class="w-full text-sm">
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-
-                            {{-- Harga --}}
                             <tr class="bg-white dark:bg-gray-800">
                                 <td class="px-4 py-3 w-28 text-gray-500 dark:text-gray-400 font-medium align-middle whitespace-nowrap">
                                     Harga
@@ -195,8 +196,6 @@ $breadcrumbSchema = [
                                     </span>
                                 </td>
                             </tr>
-
-                            {{-- Stok --}}
                             <tr class="bg-gray-50 dark:bg-gray-700">
                                 <td class="px-4 py-3 text-gray-500 dark:text-gray-400 font-medium align-middle whitespace-nowrap">
                                     Stok
@@ -219,8 +218,6 @@ $breadcrumbSchema = [
                                     @endif
                                 </td>
                             </tr>
-
-                            {{-- SKU --}}
                             <tr class="bg-white dark:bg-gray-800">
                                 <td class="px-4 py-3 text-gray-500 dark:text-gray-400 font-medium align-middle whitespace-nowrap">
                                     SKU
@@ -231,8 +228,6 @@ $breadcrumbSchema = [
                                     </span>
                                 </td>
                             </tr>
-
-                            {{-- Kategori --}}
                             <tr class="bg-gray-50 dark:bg-gray-700">
                                 <td class="px-4 py-3 text-gray-500 dark:text-gray-400 font-medium align-middle whitespace-nowrap">
                                     Kategori
@@ -251,18 +246,14 @@ $breadcrumbSchema = [
                                     @endif
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
 
-                {{-- Divider --}}
                 <hr class="my-6 border-gray-200 dark:border-gray-700">
 
-                {{-- ===== ADD TO CART SECTION ===== --}}
-                <form id="addToCartForm"
-                      action="{{ route('cart.add', $product) }}"
-                      method="POST">
+                {{-- ADD TO CART SECTION (Sama seperti sebelumnya) --}}
+                <form id="addToCartForm" action="{{ route('cart.add', $product) }}" method="POST">
                     @csrf
 
                     {{-- Quantity Selector --}}
@@ -296,7 +287,6 @@ $breadcrumbSchema = [
                             </button>
                         </div>
 
-                        {{-- Stock Warning --}}
                         <p id="stockWarning"
                            class="hidden mt-2 text-xs font-medium text-amber-600 dark:text-amber-400 flex items-center gap-1">
                             <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -306,10 +296,9 @@ $breadcrumbSchema = [
                         </p>
                     </div>
 
-                    {{-- Primary Buttons: Add to Cart + Pesan via Chat --}}
+                    {{-- Primary Buttons --}}
                     @if ($product->stock > 0)
                         <div class="grid grid-cols-2 gap-3 mb-3">
-                            {{-- Add to Cart --}}
                             <button type="submit"
                                 id="addToCartBtn"
                                 class="flex items-center justify-center gap-2
@@ -325,7 +314,6 @@ $breadcrumbSchema = [
                                 Tambah ke Keranjang
                             </button>
 
-                            {{-- Pesan via WhatsApp --}}
                             <a href="https://wa.me/6281110058788?text={{ urlencode('Halo, saya ingin memesan: ' . $product->name) }}"
                                target="_blank"
                                class="flex items-center justify-center gap-2
@@ -361,7 +349,7 @@ $breadcrumbSchema = [
                         </div>
                     @endif
 
-                    {{-- Secondary: Tokopedia --}}
+                    {{-- Tokopedia Link --}}
                     @if($product->tokopedia_link)
                         <div class="mt-1">
                             <a href="{{ $product->tokopedia_link }}"
@@ -382,83 +370,139 @@ $breadcrumbSchema = [
                             </a>
                         </div>
                     @endif
-
                 </form>
-
-                {{-- Divider --}}
-                <hr class="my-8 border-gray-200 dark:border-gray-700">
-
-                {{-- Description dengan Show More --}}
-                <div class="mb-8">
-                    <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
-                        Deskripsi Produk
-                    </h3>
-                    <div class="prose max-w-none text-gray-700 dark:text-gray-300">
-                        <div id="descriptionContent" class="line-clamp-6 text-base">
-                            {!! nl2br(e($product->description ?? 'Tidak ada deskripsi untuk produk ini.')) !!}
-                        </div>
-                        <button 
-                            id="showMoreBtn"
-                            onclick="toggleDescription()"
-                            class="mt-3 text-bluefilterpedia hover:text-blue-700 font-semibold transition hidden">
-                            Lihat Selengkapnya
-                        </button>
-                    </div>
-                </div>
-{{-- ===== SPESIFIKASI PRODUK (ACCORDION SEDERHANA) ===== --}}
-<div class="mb-8 border-b border-gray-200 dark:border-gray-700 overflow-hidden">
-    {{-- Header / Trigger --}}
-    <button 
-        id="specificationToggle"
-        onclick="toggleSpecification()"
-        class="w-full flex items-center justify-between py-4 text-left"
-    >
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">
-            Spesifikasi Produk
-        </h3>
-        
-        {{-- Icon panah --}}
-        <svg id="specificationChevron" 
-             class="w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-200" 
-             fill="none" 
-             stroke="currentColor" 
-             viewBox="0 0 24 24"
-        >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-        </svg>
-    </button>
-    
-    {{-- Content (Hidden by default) --}}
-    <div id="specificationContent" class="border-t border-gray-200 dark:border-gray-700">
-        <div class="p-4 bg-white dark:bg-gray-800">
-            @if($product->specifications && $product->specifications->count() > 0)
-                <table class="w-full text-base">
-                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                        @foreach($product->specifications as $spec)
-                            <tr>
-                                <td class="py-2 pr-4 w-1/3 text-gray-600 dark:text-gray-400 font-medium">
-                                    {{ $spec->spec_key }}
-                                </td>
-                                <td class="py-2 text-gray-900 dark:text-gray-100">
-                                    {{ $spec->spec_value }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <div class="text-center py-8">
-                    <svg class="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">
-                        Belum ada spesifikasi untuk produk ini
-                    </p>
-                </div>
-            @endif
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+{{-- BAGIAN BAWAH (FULL WIDTH): Deskripsi, Spesifikasi, Syarat & Ketentuan --}}
+<section class="bg-white dark:bg-gray-800 pb-16">
+    <div class="mx-auto max-w-7xl px-6">
+        
+        {{-- ===== SATU BOX UNTUK DESKRIPSI & SPESIFIKASI (Border Abu) ===== --}}
+        <div class="border-2 border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden bg-white dark:bg-gray-800 mb-10">
+            
+            {{-- DESKRIPSI --}}
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    Deskripsi Produk
+                </h3>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <div id="descriptionContent" class="text-base line-clamp-6">
+                        {!! nl2br(e($product->description ?? 'Tidak ada deskripsi untuk produk ini.')) !!}
+                    </div>
+                    <button 
+                        id="showMoreBtn"
+                        onclick="toggleDescription()"
+                        class="mt-3 text-bluefilterpedia hover:text-blue-700 font-semibold transition hidden">
+                        Lihat Selengkapnya
+                    </button>
+                </div>
+            </div>
+            
+            {{-- SPESIFIKASI (Tampil Semua, Tanpa Batas) --}}
+            <div class="p-6">
+                <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    Spesifikasi Produk
+                </h3>
+                
+                @if($product->specifications && $product->specifications->count() > 0)
+                    <table class="w-full text-sm">
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            @foreach($product->specifications as $spec)
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <td class="px-4 py-3 w-1/3 text-gray-600 dark:text-gray-400 font-medium border-r border-gray-100 dark:border-gray-700">
+                                        {{ $spec->spec_key }}
+                                    </td>
+                                    <td class="px-4 py-3 text-gray-900 dark:text-gray-100">
+                                        {{ $spec->spec_value }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="text-center py-8">
+                        <svg class="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">
+                            Belum ada spesifikasi untuk produk ini
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        {{-- ===== SYARAT & KETENTUAN PEMBELIAN (Dropdown, Default Tertutup) ===== --}}
+        <div class="mb-10 border-t border-gray-200 dark:border-gray-700 pt-8">
+            <button 
+                id="termsToggle"
+                onclick="toggleTerms()"
+                class="w-full flex items-center justify-between py-3 text-left group">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Syarat & Ketentuan Pembelian
+                </h3>
+                <svg id="termsChevron" 
+                     class="w-5 h-5 text-gray-400 transition-transform duration-200 group-hover:text-gray-600 dark:group-hover:text-gray-300" 
+                     fill="none" 
+                     stroke="currentColor" 
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            
+            <div id="termsContent" class="overflow-hidden transition-all duration-500 ease-in-out" style="max-height: 0; opacity: 0;">
+                <div class="pt-4 pb-2">
+                    <div class="space-y-4 text-sm text-gray-600 dark:text-gray-400">
+                        
+                        {{-- Via Website (Keranjang) --}}
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Belanja via Website (Keranjang)</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Garansi & after sales berlaku sesuai kebijakan toko</li>
+                                <li>Pengembalian dana mengikuti ketentuan yang tercantum di halaman Syarat & Ketentuan</li>
+                                <li>Proses pengiriman 1-3 hari kerja setelah pembayaran dikonfirmasi</li>
+                            </ul>
+                        </div>
+
+                        {{-- Via WhatsApp --}}
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Pesan via WhatsApp</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Harga dapat berbeda dari yang tertera di website</li>
+                                <li><strong>Tidak termasuk after sales / garansi</strong> kecuali disepakati di awal melalui chat</li>
+                                <li>Pengembalian dana tidak tersedia untuk pembelian via WhatsApp</li>
+                                <li>Barang yang sudah dikirim tidak dapat dikembalikan</li>
+                            </ul>
+                        </div>
+
+                        {{-- Via Tokopedia --}}
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Belanja via Tokopedia</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Harga mengikuti yang tertera di Tokopedia (bisa berbeda dengan website)</li>
+                                <li>Garansi & after sales <strong>sepenuhnya mengikuti kebijakan Tokopedia</strong></li>
+                                <li>Komplain & pengembalian barang melalui sistem Tokopedia, bukan ke admin website</li>
+                                <li>Kami tidak bertanggung jawab atas perbedaan harga antara website dan Tokopedia</li>
+                            </ul>
+                        </div>
+
+                        {{-- Catatan Penting --}}
+                        <div class="mt-4 pt-3 text-xs text-gray-500 dark:text-gray-500 border-t border-gray-200 dark:border-gray-700">
+                            <p>
+                                Dengan melanjutkan pembelian, Anda menyatakan telah membaca dan menyetujui 
+                                <a href="{{ route('tos') }}" class="text-bluefilterpedia hover:underline">Syarat & Ketentuan</a> 
+                                serta <a href="{{ route('privacy.policy') }}" class="text-bluefilterpedia hover:underline">Kebijakan Privasi</a> yang berlaku.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -466,18 +510,86 @@ $breadcrumbSchema = [
 
 {{-- Related Products --}}
 @if ($relatedProducts->count())
-<section class="mt-12 pb-16">
-    <h2 class="mb-6 text-2xl font-bold text-gray-900">
-        Produk Terkait
-    </h2>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
-        @foreach ($relatedProducts as $item)
-            <x-card :product="$item" />
-        @endforeach
+<section class="mt-4 pb-16 px-6">
+    <div class="mx-auto max-w-7xl">
+        <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+            Produk Terkait
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
+            @foreach ($relatedProducts as $item)
+                <x-card :product="$item" />
+            @endforeach
+        </div>
     </div>
 </section>
 @endif
+
+<section class="pb-12 bg-gray-100 dark:bg-gray-900 py-12"         
+        style="width: 100vw; 
+                position: relative; 
+                left: 50%; 
+                right: 50%; 
+                margin-left: -50vw; 
+                margin-right: -50vw;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        
+        {{-- Section Header --}}
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+                Latest <span class="text-bluefilterpedia">Articles</span>
+            </h2>
+            <a href="{{ route('blog.index') }}" 
+               class="text-bluefilterpedia hover:text-blue-700 text-sm font-medium">
+                View All →
+            </a>
+        </div>
+
+        {{-- Blog List - 2 Rows --}}
+        <div class="space-y-4">
+            @forelse($latestPosts->take(2) as $post)
+                <article class=" dark:bg-gray-900 border-b-2 border-gray-400 dark:border-gray-600 hover:shadow-md 
+                              transition-all duration-200 overflow-hidden group">
+                    
+                    <a href="{{ route('blog.show', $post->slug) }}" class="flex items-center gap-4 p-4">
+                        
+                        
+                        {{-- Konten - Kanan --}}
+                        <div class="flex-1 min-w-0">
+                            
+                            {{-- Category & Date --}}
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs text-bluefilterpedia font-medium">
+                                    {{ ucfirst(str_replace('-', ' ', $post->category)) }}
+                                </span>
+                                <span class="text-xs text-gray-400">•</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">
+                                    {{ $post->published_at?->format('d M Y') }}
+                                </span>
+                            </div>
+                            
+                            {{-- Title --}}
+                            <h3 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white 
+                                       group-hover:text-bluefilterpedia group-hover:underline transition-colors line-clamp-2">
+                                {{ $post->title }}
+                            </h3>
+                            
+                            {{-- Excerpt (Opsional - untuk desktop) --}}
+                            <p class="hidden md:block text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-3">
+                                {{ $post->excerpt ?? Str::limit(strip_tags($post->content),400) }}
+                            </p>
+                        </div>
+                    </a>
+                </article>
+                
+            @empty
+                <div class="text-center py-8">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">No articles yet.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
 <script>
 // ===== QUANTITY CONTROLS =====
 const stockMax = {{ $product->stock }};
@@ -510,7 +622,6 @@ function updateButtons() {
 function increaseQty() {
     const input = document.getElementById('quantity');
     const current = parseInt(input.value) || 1;
-    // Allow going above stock to show warning (don't cap here)
     input.value = current + 1;
     updateButtons();
 }
@@ -526,7 +637,6 @@ function onQtyInput() {
     updateButtons();
 }
 
-// Init button states
 updateButtons();
 
 // ===== ADD TO CART FORM =====
@@ -534,7 +644,7 @@ document.getElementById('addToCartForm').addEventListener('submit', function(e) 
     e.preventDefault();
 
     const qty = parseInt(document.getElementById('quantity').value);
-    if (qty > stockMax) return; // Block if over stock
+    if (qty > stockMax) return;
 
     fetch("{{ route('cart.add', $product->slug) }}", {
         method: "POST",
@@ -612,79 +722,62 @@ window.addEventListener('load', function() {
     }
 });
 
-// ===== TAMBAHKAN: SPESIFIKASI ACCORDION =====
-let isSpecificationOpen = false;
-
-// ===== SPESIFIKASI ACCORDION SMOOTH =====
-function toggleSpecification() {
-    const content = document.getElementById('specificationContent');
-    const chevron = document.getElementById('specificationChevron');
+// ===== SYARAT & KETENTUAN TOGGLE (DEFAULT TERTUTUP) =====
+function toggleTerms() {
+    const content = document.getElementById('termsContent');
+    const chevron = document.getElementById('termsChevron');
     
     if (!content || !chevron) return;
     
     if (content.style.maxHeight === '0px' || !content.style.maxHeight) {
-        // Buka dropdown
         content.style.maxHeight = content.scrollHeight + 'px';
         content.style.opacity = '1';
         chevron.classList.add('rotate-180');
     } else {
-        // Tutup dropdown
         content.style.maxHeight = '0px';
         content.style.opacity = '0';
         chevron.classList.remove('rotate-180');
     }
 }
 
-// Inisialisasi awal
+// Inisialisasi awal untuk Terms (tertutup)
 document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById('specificationContent');
-    if (content) {
-        content.style.maxHeight = '0px';
-        content.style.opacity = '0';
-    }
-    
-    // Cek hash URL
-    if (window.location.hash === '#spesifikasi') {
-        setTimeout(() => {
-            toggleSpecification();
-        }, 300);
+    const termsContent = document.getElementById('termsContent');
+    if (termsContent) {
+        termsContent.style.maxHeight = '0px';
+        termsContent.style.opacity = '0';
     }
 });
 
-// Update max-height jika window diresize (misal konten berubah)
+// Update max-height jika window diresize
 window.addEventListener('resize', function() {
-    const content = document.getElementById('specificationContent');
-    if (content && content.style.maxHeight !== '0px' && content.style.maxHeight !== '') {
-        content.style.maxHeight = content.scrollHeight + 'px';
+    const termsContent = document.getElementById('termsContent');
+    if (termsContent && termsContent.style.maxHeight !== '0px' && termsContent.style.maxHeight !== '') {
+        termsContent.style.maxHeight = termsContent.scrollHeight + 'px';
     }
 });
-// ===== TAMBAHKAN: KEYBOARD ACCESSIBILITY =====
+
+// Keyboard accessibility untuk Terms
 document.addEventListener('keydown', function(e) {
-    // Buka/tutup spesifikasi dengan tombol Enter atau Spasi saat focus di toggle
     if (e.key === 'Enter' || e.key === ' ') {
-        const toggle = document.getElementById('specificationToggle');
+        const toggle = document.getElementById('termsToggle');
         if (toggle && document.activeElement === toggle) {
             e.preventDefault();
-            toggleSpecification();
+            toggleTerms();
         }
-    }
-});
-
-// ===== TAMBAHKAN: CLOSE SPECIFICATION DENGAN ESC (opsional) =====
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isSpecificationOpen) {
-        toggleSpecification();
     }
 });
 </script>
 
 <style>
     .rotate-180 {
-    transform: rotate(180deg);
-}
-#specificationContent {
-    transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-}
+        transform: rotate(180deg);
+    }
+    
+    #termsContent {
+        transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    
     .line-clamp-6 {
         display: -webkit-box;
         -webkit-line-clamp: 6;
@@ -699,11 +792,6 @@ document.addEventListener('keydown', function(e) {
     .scrollbar-hide {
         -ms-overflow-style: none;
         scrollbar-width: none;
-    }
-
-    /* Striped table rows for dark mode */
-    .dark .bg-gray-750 {
-        background-color: rgb(38 50 56 / 0.5);
     }
 </style>
 

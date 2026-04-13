@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-
+use App\Models\Post;
 
 class ProductController extends Controller
 {
@@ -26,6 +26,13 @@ class ProductController extends Controller
             ->limit(10)
             ->get();
 
-        return view('user.product.detail', compact('product', 'relatedProducts'));
+        $latestPosts = Post::where('is_published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->latest('published_at')
+            ->take(2)
+            ->get();
+            
+        return view('user.product.detail', compact('product', 'relatedProducts' , 'latestPosts'));
     }
 }

@@ -1,4 +1,4 @@
-<a href="{{ route('blog.show', $post->slug) }}" 
+<!-- <a href="{{ route('blog.show', $post->slug) }}" 
    class="block bg-white dark:bg-gray-900 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
 
     @if($post->thumbnail)
@@ -22,4 +22,4 @@
         </div>
 
     </div>
-</a>
+</a> -->

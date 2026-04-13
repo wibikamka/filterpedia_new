@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\Admin\AdminBlogController as AdminBlogController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -29,6 +30,9 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::resource('product', AdminProductController::class);
+        Route::resource('blog', AdminBlogController::class);
+              Route::post('blog/upload-image', [AdminBlogController::class, 'uploadImage'])
+            ->name('blog.upload-image');
     });
 
 // ============================================

@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     
     <!-- TinyMCE Script -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
 </head>
 <body class="bg-gray-100 font-sans">
 

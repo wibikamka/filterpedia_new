@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\Admin\AdminBlogController as AdminBlogController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -29,6 +30,9 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::resource('product', AdminProductController::class);
+        Route::resource('blog', AdminBlogController::class);
+              Route::post('blog/upload-image', [AdminBlogController::class, 'uploadImage'])
+            ->name('blog.upload-image');
     });
 
 // ============================================
@@ -68,7 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/update-bio', [ProfileController::class, 'updateBio'])->name('update-bio');
         Route::patch('/update-email', [ProfileController::class, 'updateEmail'])->name('update-email');
         Route::patch('/update-phone', [ProfileController::class, 'updatePhone'])->name('update-phone');
-        Route::post('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('update-avatar');
+        Route::patch('/update-avatar', [ProfileController::class, 'updateAvatar'])->name('update-avatar');
     });
 
     // CART ROUTES - Masih dalam group auth yang sama

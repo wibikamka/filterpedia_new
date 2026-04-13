@@ -88,9 +88,9 @@
         </div>
 
         {{-- ── Logo ────────────────────────────────────────── --}}
-        <a href="{{ url('/') }}" title="Filterpedia - Filter Industri" class="shrink-0 flex items-center gap-2">
+        <a href="{{ url('/') }}" title="Filterpedia - Filter Industri" class="shrink-0 flex items-end gap-1">
             <img src="{{ asset('storage/img/logo/filterpedialastfilterpedia.png') }}" class="h-10 lg:h-14" alt="filterpedia Logo">
-            <span class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-bluefilterpedia">
+            <span class="text-xl -ml-4 lg:text-2xl font-bold text-gray-900 dark:text-bluefilterpedia">
                 filterpedia
             </span>
         </a>

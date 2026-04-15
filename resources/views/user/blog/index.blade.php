@@ -90,17 +90,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-md p-8 md:p-12">
             <div class="max-w-2xl mx-auto text-center">
-                <h2 class="text-2xl md:text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Jangan lewatkan artikel terbaru!</h2>
                 <p class="text-gray-600 mb-6">
                     Dapatkan update artikel terbaru langsung di email Anda.
                 </p>
                 <form class="flex flex-col sm:flex-row gap-3">
                     <input type="email" 
-                           placeholder="Your email address"
+                           placeholder="Alamat email Anda"
                            class="flex-1 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-bluefilterpedia">
                     <button type="submit" 
                             class="bg-bluefilterpedia text-white px-6 py-3 rounded-md hover:bg-bluefilterpedia-sec transition font-medium">
-                        Subscribe
+                        Dapatkan Update
                     </button>
                 </form>
             </div>

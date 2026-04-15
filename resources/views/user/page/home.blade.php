@@ -101,10 +101,10 @@
             <div class="lg:col-span-1">
                 <div class=" lg:top-20">
                     <h1 class="text-lg font-bold text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700 lg:block hidden">
-                        Water Filteration Articles
+                        Solusi Tepat Untuk Kebutuhan Filtrasi Anda
                     </h1>
                     <h1 class="text-lg font-bold text-white mb-3 lg:hidden block">
-                        Water Filteration Articles
+                        Solusi Tepat Untuk Kebutuhan Filtrasi Anda
                     </h1>
                     
                     {{-- Horizontal scroll menu di mobile --}}
@@ -243,7 +243,7 @@
                     @foreach([
                         ['img' => 'img/logo/Tokopedia_Logo 1.png',       'name' => 'Tokopedia',   'url' => 'https://www.tokopedia.com/filterpedia-co-id'],
                         ['img' => 'img/logo/tiktokshop.png',             'name' => 'TikTok Shop', 'url' => 'https://www.tiktok.com/@filterpedia.co.id'],
-                        ['img' => 'img/logo/shopee.png',                 'name' => 'Shopee',      'url' => 'https://shopee.co.id'],
+                        ['img' => 'img/logo/shopee.png',                 'name' => 'Shopee',      'url' => 'https://shopee.co.id/filterpedia.co.id'],
                         ['img' => 'img/logo/Digital_Inline_Green.png',   'name' => 'WhatsApp',    'url' => 'https://wa.me/6281110058788?text=Halo filterpedia'],
                     ] as $mp)
                         <a href="{{ $mp['url'] }}"
@@ -384,11 +384,11 @@
         {{-- Section Header --}}
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-                Latest <span class="text-bluefilterpedia">Articles</span>
+                Artikel <span class="text-bluefilterpedia">Terbaru</span>
             </h2>
             <a href="{{ route('blog.index') }}" 
                class="text-bluefilterpedia hover:text-blue-700 text-sm font-medium">
-                View All →
+                Lihat Selengkapnya →
             </a>
         </div>
 

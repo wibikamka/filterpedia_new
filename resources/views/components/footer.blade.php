@@ -83,23 +83,23 @@
             <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
                 {{-- Resources Column --}}
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Resources</h2>
+                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Sumber</h2>
                     <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
-                            <a href="{{ url('/') }}" class="hover:underline hover:text-bluefilterpedia">Home</a>
+                            <a href="{{ url('/') }}" class="hover:underline hover:text-bluefilterpedia">Beranda</a>
                         </li>
                         <li class="mb-4">
                             <a href="{{ url('/blog') }}" class="hover:underline hover:text-bluefilterpedia">blog</a>
                         </li>
                         <li>
-                            <a href="{{ url('/about') }}" class="hover:underline hover:text-bluefilterpedia">About</a>
+                            <a href="{{ url('/about') }}" class="hover:underline hover:text-bluefilterpedia">Tentang Kami</a>
                         </li>
                     </ul>
                 </div>
 
                 {{-- Follow Us Column --}}
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Follow us</h2>
+                    <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Temukan Kami</h2>
                     <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
                             <a href="https://www.instagram.com/filterpedia.id" target="_blank" class="hover:underline hover:text-bluefilterpedia">Instagram</a>
@@ -118,10 +118,10 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-bluefilterpedia">Legal</h2>
                     <ul class="font-medium text-gray-600 dark:text-gray-200">
                         <li class="mb-4">
-                            <a href="{{ url('/privacy-policy') }}" class="hover:underline hover:text-bluefilterpedia">Privacy Policy</a>
+                            <a href="{{ url('/privacy-policy') }}" class="hover:underline hover:text-bluefilterpedia">Kebijakan Privasi</a>
                         </li>
                         <li>
-                            <a href="{{ url('/terms') }}" class="hover:underline hover:text-bluefilterpedia">Terms &amp; Conditions</a>
+                            <a href="{{ url('/terms') }}" class="hover:underline hover:text-bluefilterpedia">Syarat & Ketentuan</a>
                         </li>
                     </ul>
                 </div>

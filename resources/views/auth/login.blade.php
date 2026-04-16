@@ -373,7 +373,7 @@ $tab = request('tab', 'login');
                 berkualitas tinggi untuk industri &amp; komersial.
             </p>
             <div class="stats">
-                <div><div class="stat-n">500+</div><div class="stat-l">Produk</div></div>
+                <div><div class="stat-n">100+</div><div class="stat-l">Produk</div></div>
                 <div><div class="stat-n">10+</div><div class="stat-l">Tahun</div></div>
                 <div><div class="stat-n">1K+</div><div class="stat-l">Klien</div></div>
             </div>
@@ -403,12 +403,50 @@ $tab = request('tab', 'login');
                             required autofocus autocomplete="username" />
                         @error('email') <div class="ferr">{{ $message }}</div> @enderror
                     </div>
-                    <div class="fg">
-                        <label class="flabel" for="password">Kata Sandi</label>
-                        <input id="password" class="finput" type="password" name="password"
-                            placeholder="••••••••" required autocomplete="current-password" />
-                        @error('password') <div class="ferr">{{ $message }}</div> @enderror
-                    </div>
+<div class="fg relative">
+    <label class="flabel" for="password">Kata Sandi</label>
+
+    <input id="login_pass"
+        class="finput pr-10"
+        type="password"
+        name="password"
+        placeholder="••••••••"
+        required autocomplete="current-password" />
+
+    <button type="button"
+        onclick="togglePassword('login_pass', 'eye-open-3', 'eye-close-3')"
+        class="absolute right-3 top-9 text-gray-500">
+
+        <!-- eye open -->
+        <svg id="eye-open-3" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5
+                c4.477 0 8.268 2.943 9.542 7
+                -1.274 4.057-5.065 7-9.542 7
+                -4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+
+        <!-- eye closed -->
+        <svg id="eye-close-3" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19
+                c-4.478 0-8.268-2.943-9.542-7
+                a9.956 9.956 0 012.042-3.362M6.223 6.223
+                A9.953 9.953 0 0112 5c4.478 0 8.268 2.943
+                9.542 7a9.97 9.97 0 01-4.132 5.411M15
+                12a3 3 0 11-6 0 3 3 0 016 0zm6
+                6L3 3" />
+        </svg>
+
+    </button>
+
+
+    @error('password')
+        <div class="ferr">{{ $message }}</div>
+    @enderror
+</div>
                     <div class="chk">
                         <input id="remember_me" type="checkbox" name="remember">
                         <label for="remember_me">Ingat saya di perangkat ini</label>
@@ -444,18 +482,90 @@ $tab = request('tab', 'login');
                             required autocomplete="username" />
                         @error('email') <div class="ferr">{{ $message }}</div> @enderror
                     </div>
-                    <div class="fg">
-                        <label class="flabel" for="reg_pass">Kata Sandi</label>
-                        <input id="reg_pass" class="finput" type="password" name="password"
-                            placeholder="Min. 8 karakter" required autocomplete="new-password" />
-                        @error('password') <div class="ferr">{{ $message }}</div> @enderror
-                    </div>
-                    <div class="fg" style="margin-bottom:1.35rem;">
-                        <label class="flabel" for="reg_pass_confirm">Konfirmasi Kata Sandi</label>
-                        <input id="reg_pass_confirm" class="finput" type="password"
-                            name="password_confirmation" placeholder="Ulangi kata sandi"
-                            required autocomplete="new-password" />
-                    </div>
+ <div class="fg relative">
+    <label class="flabel" for="reg_pass">Kata Sandi</label>
+
+    <input id="reg_pass"
+        class="finput pr-10"
+        type="password"
+        name="password"
+        placeholder="Min. 8 karakter"
+        required autocomplete="new-password" />
+
+    <button type="button"
+        onclick="togglePassword('reg_pass', 'eye-open-1', 'eye-close-1')"
+        class="absolute right-3 top-9 text-gray-500">
+
+        <!-- eye open -->
+        <svg id="eye-open-1" xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5
+                c4.477 0 8.268 2.943 9.542 7
+                -1.274 4.057-5.065 7-9.542 7
+                -4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+
+        <!-- eye closed -->
+        <svg id="eye-close-1" xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19
+                c-4.478 0-8.268-2.943-9.542-7
+                a9.956 9.956 0 012.042-3.362M6.223 6.223
+                A9.953 9.953 0 0112 5c4.478 0 8.268 2.943
+                9.542 7a9.97 9.97 0 01-4.132 5.411M15
+                12a3 3 0 11-6 0 3 3 0 016 0zm6
+                6L3 3" />
+        </svg>
+    </button>
+
+    @error('password')
+        <div class="ferr">{{ $message }}</div>
+    @enderror
+</div>
+ <div class="fg relative" style="margin-bottom:1.35rem;">
+    <label class="flabel" for="reg_pass_confirm">Konfirmasi Kata Sandi</label>
+
+    <input id="reg_pass_confirm"
+        class="finput pr-10"
+        type="password"
+        name="password_confirmation"
+        placeholder="Ulangi kata sandi"
+        required autocomplete="new-password" />
+
+    <button type="button"
+        onclick="togglePassword('reg_pass_confirm', 'eye-open-2', 'eye-close-2')"
+        class="absolute right-3 top-9 text-gray-500">
+
+        <!-- eye open -->
+        <svg id="eye-open-2" xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5
+                c4.477 0 8.268 2.943 9.542 7
+                -1.274 4.057-5.065 7-9.542 7
+                -4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+
+        <!-- eye closed -->
+        <svg id="eye-close-2" xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19
+                c-4.478 0-8.268-2.943-9.542-7
+                a9.956 9.956 0 012.042-3.362M6.223 6.223
+                A9.953 9.953 0 0112 5c4.478 0 8.268 2.943
+                9.542 7a9.97 9.97 0 01-4.132 5.411M15
+                12a3 3 0 11-6 0 3 3 0 016 0zm6
+                6L3 3" />
+        </svg>
+    </button>
+</div>
                     <button type="submit" class="btn">Buat Akun</button>
                     <div class="ffoot" style="margin-top:1rem;">
                         <a href="#" onclick="switchTab('masuk');return false;">Sudah punya akun? Masuk di sini</a>
@@ -469,6 +579,23 @@ $tab = request('tab', 'login');
 </div>
 
 <script>
+
+function togglePassword(inputId, openId, closeId) {
+    const input = document.getElementById(inputId);
+    const openIcon = document.getElementById(openId);
+    const closeIcon = document.getElementById(closeId);
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        openIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+    } else {
+        input.type = 'password';
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+    }
+}
+
     document.addEventListener("DOMContentLoaded", function () {
     const tab = "{{ $tab }}";
 

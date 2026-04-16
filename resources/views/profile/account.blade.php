@@ -228,7 +228,7 @@
                 $subItems = [
                     ['label' => 'Kenali Filterpedia', 'href' => '/about'],
                     ['label' => 'Berita / Blog',      'href' => '/blog'],
-                    ['label' => 'Syarat & Ketentuan', 'href' => '/tos'],
+                    ['label' => 'Syarat & Ketentuan', 'href' => '/terms'],
                     ['label' => 'Kebijakan Privasi',  'href' => '/privacy-policy'],
                 ];
                 @endphp
@@ -366,7 +366,7 @@
                 <div x-show="open" x-transition:enter="transition ease-out duration-100"
                      x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                      class="border-t border-gray-100 dark:border-gray-800 divide-y divide-gray-100 dark:divide-gray-800 bg-gray-50 dark:bg-gray-800/50">
-                    @foreach([['Kenali Filterpedia','/about'],['Berita / Blog','/blog'],['Syarat & Ketentuan','/tos'],['Kebijakan Privasi','/privacy-policy']] as $sub)
+                    @foreach([['Kenali Filterpedia','/about'],['Berita / Blog','/blog'],['Syarat & Ketentuan','/terms'],['Kebijakan Privasi','/privacy-policy']] as $sub)
                     <a href="{{ url($sub[1]) }}" class="flex items-center justify-between pl-11 pr-4 py-2.5 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
                         {{ $sub[0] }}
                         <svg class="w-3 h-3 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -473,26 +473,84 @@
             </div>
 
             {{-- DAFTAR ALAMAT --}}
-            <div x-show="activeTab === 'alamat'" x-cloak
-                 x-transition:enter="transition ease-out duration-150"
-                 x-transition:enter-start="opacity-0 translate-y-0.5"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-semibold text-gray-800 dark:text-white">Daftar Alamat</p>
-                        <p class="text-xs text-gray-400 mt-0.5">Kelola alamat pengiriman</p>
-                    </div>
-                    <a href="{{ url('/addresses/create') }}" class="text-xs px-3 py-1.5 bg-bluefilterpedia text-white rounded-lg hover:opacity-90 transition-opacity font-medium">+ Tambah</a>
-                </div>
-                <div class="px-6 py-12 text-center">
-                    <svg class="w-10 h-10 mx-auto mb-3 text-gray-200 dark:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    <p class="text-sm text-gray-400 dark:text-gray-500">Belum ada alamat tersimpan</p>
-                </div>
+{{-- DAFTAR ALAMAT --}}
+<div x-show="activeTab === 'alamat'" x-cloak
+     x-transition:enter="transition ease-out duration-150"
+     x-transition:enter-start="opacity-0 translate-y-0.5"
+     x-transition:enter-end="opacity-100 translate-y-0"
+     class="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+    
+    <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+        <p class="text-sm font-semibold text-gray-800 dark:text-white">Daftar Alamat</p>
+        <p class="text-xs text-gray-400 mt-0.5">Kelola alamat pengiriman</p>
+    </div>
+    
+    {{-- Form Tambah Alamat Baru (REGULAR FORM, redirect) --}}
+<div class="p-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/30">
+    <form action="{{ route('addresses.store') }}" method="POST" class="space-y-3">
+        @csrf
+        <div class="grid grid-cols-2 gap-3">
+            <input type="text" name="label" placeholder="Label (opsional)" 
+                   value="{{ old('label') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+            <input type="text" name="recipient_name" placeholder="Nama Penerima *" required
+                   value="{{ old('recipient_name') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+            <input type="text" name="phone" placeholder="Telepon *" required
+                   value="{{ old('phone') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+            <input type="text" name="postal_code" placeholder="Kode Pos *" required
+                   value="{{ old('postal_code') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+        </div>
+        <textarea name="full_address" rows="2" placeholder="Alamat Lengkap *" required
+                  class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">{{ old('full_address') }}</textarea>
+        <div class="grid grid-cols-2 gap-3">
+            <input type="text" name="city" placeholder="Kota *" required
+                   value="{{ old('city') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+            <input type="text" name="province" placeholder="Provinsi *" required
+                   value="{{ old('province') }}"
+                   class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia/30">
+        </div>
+        <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" name="is_default" value="1" {{ old('is_default') ? 'checked' : '' }} class="rounded">
+            <span class="text-sm text-gray-700 dark:text-gray-300">Jadikan alamat utama</span>
+        </label>
+        
+        @if($errors->any())
+            <div class="text-red-500 text-xs space-y-1">
+                @foreach($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
             </div>
+        @endif
+        
+        <div class="flex justify-end">
+            <button type="submit" class="px-4 py-2 bg-bluefilterpedia text-white text-sm font-medium rounded-lg hover:opacity-90">
+                + Tambah Alamat
+            </button>
+        </div>
+    </form>
+</div>
+    {{-- List Alamat dengan inline edit --}}
+    <div class="divide-y divide-gray-100 dark:divide-gray-800">
+        @forelse(auth()->user()->addresses as $address)
+            <x-account.address-item :address="$address" />
+        @empty
+            <div class="px-6 py-12 text-center">
+                <svg class="w-10 h-10 mx-auto mb-3 text-gray-200 dark:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <p class="text-sm text-gray-400 dark:text-gray-500">Belum ada alamat tersimpan</p>
+                <p class="text-xs text-gray-400 mt-1">Isi form di atas untuk menambah alamat</p>
+            </div>
+        @endforelse
+    </div>
+</div>
 
             {{-- KEAMANAN --}}
             <div x-show="activeTab === 'keamanan'" x-cloak

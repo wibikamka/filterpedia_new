@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\User\CategoryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\SearchController;
@@ -11,9 +12,13 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\Admin\AdminBlogController as AdminBlogController;
+use App\Http\Controllers\AddressController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', function() {
+    return redirect()->route('home');
+});
 Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -81,9 +86,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-    
-    // Home route (kenapa ada /home sendiri?)
-    Route::get('/home', fn() => view('user.page.home'))->name('home');
+
+    Route::middleware('auth')->group(function () {
+    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+    Route::put('/addresses/{address}', [AddressController::class, 'update'])->name('addresses.update');
+    Route::delete('/addresses/{address}', [AddressController::class, 'destroy'])->name('addresses.destroy');
 });
+    
+   
+});
+
+
 
 require __DIR__.'/auth.php';

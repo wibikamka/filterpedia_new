@@ -26,14 +26,11 @@
 />
 
 <section class="category-bar relative bg-white dark:bg-gray-900 mb-10 rounded-lg">
-    
-    {{-- Konten dengan padding top lebih besar agar tidak tertimpa badge --}}
-    <div class=" w-full pt-4">
-        {{-- Wrapper: Mobile: horizontal scroll, Desktop: grid layout --}}
-        <div class="flex flex-nowrap gap-3 overflow-x-auto pb-4 scrollbar-hide md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:overflow-visible md:pb-0">
+    <div class="w-full pt-4">
+        <div class="flex flex-wrap justify-center gap-3 pb-4 overflow-x-auto scrollbar-hide md:overflow-visible md:pb-0">
 
             @foreach($categories as $category)
-                <div class="shrink-0 w-36 md:w-auto bg-linear-to-b from-white to-transparent dark:from-gray-800 dark:to-gray-700 rounded-lg hover:border-2 hover:border-bluefilterpedia shadow-md overflow-hidden border-2 border-gray-200 dark:border-gray-700 group">
+                <div class="shrink-0 w-36 md:w-48 lg:w-52 xl:w-56 bg-linear-to-b from-white to-transparent dark:from-gray-800 dark:to-gray-700 rounded-lg hover:border-2 hover:border-bluefilterpedia shadow-md overflow-hidden border-2 border-gray-200 dark:border-gray-700 group">
             
                     <a href="{{ route('product.category', $category->slug) }}">
                     <div class="relative aspect-4/5 hover:bg-bluefilterpedia/10 transition cursor-pointer">
@@ -43,24 +40,20 @@
                                 <img src="{{ asset('storage/' . $category->icon) }}" 
                                      alt="{{ $category->name }}" 
                                      class="w-full h-full object-contain transition-all duration-300 group-hover:brightness-95 dark:group-hover:brightness-125">
-                    
                             @endif
                         </div>
 
                         <div class="absolute inset-0 p-3 flex flex-col justify-end">
-                            {{-- Nama kategori (dengan truncate untuk nama panjang) --}}
                             <span
                                class="block font-semibold text-gray-800 dark:text-gray-200 text-sm md:text-base 2xl:text-xl mb-0.5 transition truncate" 
                                title="{{ $category->name }}">
                                 {{ $category->name }}
                             </span>
                             
-                            {{-- Deskripsi kategori dengan line-clamp 2 --}}
                             <p class="text-xs md:text-base text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition line-clamp-3 md:line-clamp-4">
                                 {{ $category->description ?? 'Lorem ipsum dolor sit amet Lorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet.' }}
                             </p>
                             
-                            {{-- Tombol atau link ke kategori --}}
                             <div class="mt-1">
                                 <span class="text-[10px] sm:text-xs text-bluefilterpedia font-medium opacity-80 hover:opacity-100 transition">
                                     Lihat →

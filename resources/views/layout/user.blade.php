@@ -49,12 +49,12 @@ overflow-x-hidden transition-colors duration-300">
 <main class="container mx-auto px-4 sm:px-6 lg:px-16 2xl:px-32 min-h-screen">
     
     {{-- WhatsApp Button --}}
-    <a 
-        id="wa-button" 
-        href="https://wa.me/6281110058788?text=Halo,%20saya%20ingin%20berkonsultasi"
-        target="_blank"
-        class="fixed bottom-32 md:bottom-28 right-4 md:right-6 z-50 group floating-button"
-        aria-label="Konsultasi via WhatsApp">
+  <a 
+    id="wa-button" 
+    href="https://wa.me/6281110058788?text=Halo,%20saya%20ingin%20berkonsultasi"
+    target="_blank"
+    class="fixed bottom-32 md:bottom-28 right-4 md:right-6 z-50 group floating-button"
+    aria-label="Konsultasi via WhatsApp">
         
         {{-- Rectangle Container --}}
         <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
@@ -68,18 +68,18 @@ overflow-x-hidden transition-colors duration-300">
             
             {{-- Text (di Kanan) - Muncul saat hover --}}
             <span class="button-text text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base whitespace-nowrap text-center">
-                Consultation
+                Konsultasi
             </span>
         </div>
     </a>
 
     {{-- Tokopedia Button --}}
-    <a 
-        id="tok-button"
-        href="https://www.tokopedia.com/filterpedia-co-id"
-        target="_blank"
-        class="fixed bottom-16 md:bottom-8 right-4 md:right-6 z-50 group floating-button"
-        aria-label="Kunjungi Toko Tokopedia">
+<a 
+    id="tok-button"
+    href="https://www.tokopedia.com/filterpedia-co-id"
+    target="_blank"
+    class="fixed bottom-16 md:bottom-16 right-4 md:right-6 z-50 group floating-button"
+    aria-label="Kunjungi Toko Tokopedia">
         
         {{-- Rectangle Container --}}
         <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
@@ -97,6 +97,30 @@ overflow-x-hidden transition-colors duration-300">
             </span>
         </div>
     </a>
+    
+    {{-- shopee Button --}}
+     <a id="shopee-button"
+    href="https://www.shopee.co.id/filterpedia"
+    target="_blank"
+    class="fixed bottom-0 md:bottom-4 right-4 md:right-6 z-50 group floating-button"
+    aria-label="Kunjungi Toko Shopee">
+        
+        {{-- Rectangle Container --}}
+        <div class="button-container flex items-center bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl overflow-hidden pl-1 py-1">
+            {{-- Tokopedia Icon (Bulat di Kiri) --}}
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center ring-2 ring-orange-600 shrink-0">
+                <img 
+                    src="{{ asset('storage/img/logo/shopee-link.png') }}" 
+                    alt="Shopee" 
+                    class="w-full h-full p-2 object-cover">
+            </div>
+            
+            {{-- Text (di Kanan) - Muncul saat hover --}}
+            <span class="button-text text-gray-900 dark:text-gray-100 font-medium text-sm md:text-base whitespace-nowrap text-center">
+                Shopee
+            </span>
+        </div>
+    </a>
 
     @yield('content')
 </main>
@@ -107,6 +131,7 @@ overflow-x-hidden transition-colors duration-300">
     <script>
         const waBtn = document.getElementById('wa-button');
         const tokBtn = document.getElementById('tok-button');
+        const shopeeBtn = document.getElementById('shopee-button');
         const footer = document.getElementById('main-footer');
     
         function updateButtonPosition() {
@@ -119,11 +144,17 @@ overflow-x-hidden transition-colors duration-300">
                 
                 const offset = distanceFromBottom + 12; 
     
-                waBtn.style.bottom = (offset + 92) + 'px'; 
-                tokBtn.style.bottom = (offset + 16) + 'px';
+        waBtn.style.bottom = (offset + 92) + 'px';
+        
+        // Tokopedia - tengah (beri jarak 64px dari WA)
+        tokBtn.style.bottom = (offset + 28) + 'px';
+        
+        // Shopee - paling atas (beri jarak 64px dari Tokopedia)
+        shopeeBtn.style.bottom = (offset - 36) + 'px';
             } else {
                 waBtn.style.bottom = '';
                 tokBtn.style.bottom = '';
+                shopeeBtn.style.bottom = '';
             }
         }
     

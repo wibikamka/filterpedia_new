@@ -10,7 +10,13 @@ class NavbarComposer
 {
     public function compose(View $view)
     {
-        $categories = Category::all();
+        $categories = Category::where('is_active', true)
+            ->whereHas('products', function($q) {
+                $q->where('is_active', true);
+            })
+            ->orderBy('name')
+            ->get();
+        
         $view->with('categories', $categories);
     }
 }

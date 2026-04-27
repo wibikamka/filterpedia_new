@@ -33,12 +33,12 @@ class BlogController extends Controller
         $posts = $query->paginate(9)->withQueryString();
 
         // Get categories for filter
-        $categories = [
-            'news' => 'News',
-            'knowledge' => 'Knowledge',
-            'lifestyle' => 'Lifestyle',
-            'product-info' => 'Product Info'
-        ];
+   $categories = [
+    'berita' => 'Berita',
+    'pengetahuan' => 'Pengetahuan',
+    'gaya_hidup' => 'Gaya Hidup',
+    'informasi_produk' => 'Informasi Produk'  // atau 'product-info' dulu?
+];
 
         return view('user.blog.index', compact('posts', 'categories'));
     }

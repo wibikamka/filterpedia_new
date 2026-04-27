@@ -24,15 +24,14 @@ class HomeController extends Controller
             ->latest('published_at')
             ->take(2)
             ->get();
-
-        // Ambil semua kategori unik dari tabel Post
-        $postCategories = Post::where('is_published', true)
+                $postCategories = Post::where('is_published', true)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
-            ->select('category')
             ->distinct()
             ->pluck('category')
             ->toArray();
+
+        // Ambil semua kategori unik dari tabel Post
 
         // Format kategori dengan 3 post terbaru masing-masing
         $blogCategories = collect($postCategories)->map(function($categorySlug) {

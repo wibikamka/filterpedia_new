@@ -49,11 +49,11 @@
             <input type="text" 
                    name="search" 
                    value="{{ request('search') }}"
-                   placeholder="Search articles..."
+                   placeholder="Cari artikel..."
                    class="border border-gray-300 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-bluefilterpedia flex-1">
             <button type="submit" 
                     class="bg-bluefilterpedia text-white px-4 py-2 rounded-r-md hover:bg-bluefilterpedia transition text-sm">
-                Search
+                Cari
             </button>
         </form>
     </div>
